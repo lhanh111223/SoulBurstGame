@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +10,7 @@ public class WeaponController : MonoBehaviour
     public float BulletForce;
     public int LazerLength;
     //public LineRenderer lineRenderer;
+    public float maxLaserDistance = 100f;  // Khoảng cách tối đa của tia laser
 
     LineRenderer lineRenderer;
     float _timeBetweenFire;
@@ -17,9 +18,11 @@ public class WeaponController : MonoBehaviour
     string _bulletType;
     GameObject lazer;
 
+
     // Start is called before the first frame update
     void Start()
     {
+
         localScaleY_Weapon = transform.localScale.y;
         _bulletType = Bullet.GetComponent<BulletController>().bulletType.ToString();
         lazer = Instantiate(Bullet, FirePoint.position, Quaternion.identity);

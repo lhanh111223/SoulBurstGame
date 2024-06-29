@@ -14,7 +14,7 @@ public class MovementController : MonoBehaviour
     public float Speed = 5f;
     public GameObject DashEffect;
     public float DashDelaySeconds;
-    
+
 
     // Dash
     public float DashBoost;
@@ -77,7 +77,7 @@ public class MovementController : MonoBehaviour
         RotatePlayerWithMouse();
 
         this.rb.velocity = direction.normalized * this.Speed;
-        this.animator.SetBool("PlayerNinjaRun", direction.magnitude > 0f);
+        this.animator.SetBool("PlayerRun", direction.magnitude > 0f);
 
         // Dash
         if (Input.GetKeyDown(KeyCode.Space) && !_isDashing && _dashTime <= 0)
@@ -97,8 +97,8 @@ public class MovementController : MonoBehaviour
         {
             _dashTime -= Time.deltaTime;
         }
-        
-        
+
+
     }
 
     // Dashing effect
@@ -141,7 +141,7 @@ public class MovementController : MonoBehaviour
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 lookDir = mousePos - transform.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
-        if ((angle > 90 && angle < 180) || (angle > -180 && angle < -90) )
+        if ((angle > 90 && angle < 180) || (angle > -180 && angle < -90))
         {
             BodyPlayer.localScale = new Vector3(-this._localScaleX, BodyPlayer.localScale.y, BodyPlayer.localScale.z);
         }
@@ -150,8 +150,5 @@ public class MovementController : MonoBehaviour
             BodyPlayer.localScale = new Vector3(this._localScaleX, BodyPlayer.localScale.y, BodyPlayer.localScale.z);
         }
     }
-
-    
-
 
 }
