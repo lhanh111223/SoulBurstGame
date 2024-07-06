@@ -11,14 +11,15 @@ public class PlayerController : MonoBehaviour
     private Animator _anim;
     private bool canPressF = false;
     private Vector3 boatPositionOffset;
-    private BoatController boatController; // Thêm biến tham chiếu đến BoatController
+    private BoatController boatController;
+    
 
     private void Start()
     {
         _anim = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
         boatPositionOffset = transform.position - boat.position;
-        boatController = boat.GetComponent<BoatController>(); // Lấy tham chiếu đến BoatController
+        boatController = boat.GetComponent<BoatController>(); 
     }
 
     void Update()
@@ -38,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
         float distanceToBoat = Vector2.Distance(transform.position, boat.position);
 
-        if (distanceToBoat <= maxDistanceToF && !boatController.IsMoving()) // Kiểm tra không cho phép nhấn F khi thuyền đang di chuyển
+        if (distanceToBoat <= maxDistanceToF && !boatController.IsMoving()) 
         {
             canPressF = true;
         }
