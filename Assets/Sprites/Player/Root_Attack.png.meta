@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3fe627bbcc636394a80fb625884fee09
+guid: 21b776be2df8c8b45a00753bb58de0ee
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 24
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Root_Walk_0
+      name: Root_Attack_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f256b12052f96264b9f52b081cc587b0
-      internalID: -2115362352
+      spriteID: 49ed31015bac1c04d83e745a19f6b499
+      internalID: 1424368417
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Root_Walk_1
+      name: Root_Attack_1
       rect:
         serializedVersion: 2
         x: 64
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 596d848e992d9244e9ee669acf5a3844
-      internalID: 1969227778
+      spriteID: 65abb90e16fbe8942942ead9d98dac70
+      internalID: -442096464
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Root_Walk_2
+      name: Root_Attack_2
       rect:
         serializedVersion: 2
         x: 128
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc03d6d3aa0061848b34e8cf7353a41f
-      internalID: 58456446
+      spriteID: 43225d162ce684040a43327c48c529e2
+      internalID: 1154021042
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Root_Walk_3
+      name: Root_Attack_3
       rect:
         serializedVersion: 2
         x: 192
@@ -174,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f1a24daccd6492d4597cf1d803232c71
-      internalID: 745779374
+      spriteID: 0c66847631fa78c44a31dd2f6ba226e8
+      internalID: 2034963777
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Root_Walk_4
+      name: Root_Attack_4
       rect:
         serializedVersion: 2
         x: 0
@@ -195,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c2c9f37b356647f47a821681a423479a
-      internalID: -1300515586
+      spriteID: ab9beeb75cfaaac4899720f50051aac1
+      internalID: 503603639
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Root_Walk_5
+      name: Root_Attack_5
       rect:
         serializedVersion: 2
         x: 64
@@ -216,14 +216,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bce9aed54719259428cb03e6f2cf6f94
-      internalID: 648259574
+      spriteID: 7c21816f2becbd643a3baf7e669dc4a3
+      internalID: -1256831272
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Root_Walk_6
+      name: Root_Attack_6
       rect:
         serializedVersion: 2
         x: 128
@@ -237,14 +237,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8fffe5bb296f9b6438ced02a3b967540
-      internalID: 759915582
+      spriteID: 0ef928a624335294fad231d5c3179d7a
+      internalID: -1876454995
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Root_Walk_7
+      name: Root_Attack_7
       rect:
         serializedVersion: 2
         x: 192
@@ -258,14 +258,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5f98c82fc2275242a9ed03b5780d126
-      internalID: 1500241027
+      spriteID: a4fedba574aa5f5428dbdb65048120f7
+      internalID: -445013465
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Root_Walk_8
+      name: Root_Attack_8
       rect:
         serializedVersion: 2
         x: 0
@@ -279,14 +279,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1cdbe8c6925f6044882aafc56206d958
-      internalID: -1662450742
+      spriteID: 6b7daa071fd3b35468022796c7963c97
+      internalID: 695327293
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Root_Walk_9
+      name: Root_Attack_9
       rect:
         serializedVersion: 2
         x: 64
@@ -300,14 +300,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 82beb435e8817cf47a02e1737275f5b2
-      internalID: -1712810510
+      spriteID: bc6d8a46ab995cc4a801f05951018a75
+      internalID: -1982185686
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Root_Walk_10
+      name: Root_Attack_10
       rect:
         serializedVersion: 2
         x: 128
@@ -321,14 +321,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88a201fd6c7ffce428c622da6cf48f9d
-      internalID: -1930777342
+      spriteID: a97ff5bfb0da8cf4b9600c823a37e625
+      internalID: 2132667173
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Root_Walk_11
+      name: Root_Attack_11
       rect:
         serializedVersion: 2
         x: 192
@@ -342,14 +342,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e744dc923396d384db472c678c7bb0b9
-      internalID: 743110580
+      spriteID: 2e88187085dda7647abc016f0128dd2b
+      internalID: -1794758935
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Root_Walk_12
+      name: Root_Attack_12
       rect:
         serializedVersion: 2
         x: 0
@@ -363,14 +363,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ca9986bf2e9ead42a433739355e4f19
-      internalID: 338642660
+      spriteID: e3a63744f4b0d654eafae02d3389dbc4
+      internalID: -960180596
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Root_Walk_13
+      name: Root_Attack_13
       rect:
         serializedVersion: 2
         x: 64
@@ -384,14 +384,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ccc34ab9a229954da43d891d46fcf95
-      internalID: 1705940479
+      spriteID: a17285ba5a3610b4ebf2c566b47d246d
+      internalID: 1004224506
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Root_Walk_14
+      name: Root_Attack_14
       rect:
         serializedVersion: 2
         x: 128
@@ -405,14 +405,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a5155cd65d555b448155638900afc90
-      internalID: 1656041873
+      spriteID: b81a98d2c59619a479921917b03807b7
+      internalID: 661560875
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Root_Walk_15
+      name: Root_Attack_15
       rect:
         serializedVersion: 2
         x: 192
@@ -426,8 +426,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ebc6dcea99e7ca5449baa5f06dffae32
-      internalID: -843721299
+      spriteID: 6ca65a62639441a438aa1e20916f85ec
+      internalID: 224158470
       vertices: []
       indices: 
       edges: []
@@ -443,22 +443,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Root_Walk_0: -2115362352
-      Root_Walk_1: 1969227778
-      Root_Walk_10: -1930777342
-      Root_Walk_11: 743110580
-      Root_Walk_12: 338642660
-      Root_Walk_13: 1705940479
-      Root_Walk_14: 1656041873
-      Root_Walk_15: -843721299
-      Root_Walk_2: 58456446
-      Root_Walk_3: 745779374
-      Root_Walk_4: -1300515586
-      Root_Walk_5: 648259574
-      Root_Walk_6: 759915582
-      Root_Walk_7: 1500241027
-      Root_Walk_8: -1662450742
-      Root_Walk_9: -1712810510
+      Root_Attack_0: 1424368417
+      Root_Attack_1: -442096464
+      Root_Attack_10: 2132667173
+      Root_Attack_11: -1794758935
+      Root_Attack_12: -960180596
+      Root_Attack_13: 1004224506
+      Root_Attack_14: 661560875
+      Root_Attack_15: 224158470
+      Root_Attack_2: 1154021042
+      Root_Attack_3: 2034963777
+      Root_Attack_4: 503603639
+      Root_Attack_5: -1256831272
+      Root_Attack_6: -1876454995
+      Root_Attack_7: -445013465
+      Root_Attack_8: 695327293
+      Root_Attack_9: -1982185686
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
