@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,7 +13,9 @@ public class PlayerController : MonoBehaviour
     private bool canPressF = false;
     private Vector3 boatPositionOffset;
     private BoatController boatController;
-    
+    public LayerMask explosionLayerMask;
+    public Tilemap breakUnknownTiles;
+    public BreakUnknownController breakUnknownPrefabs;
 
     private void Start()
     {
@@ -72,6 +75,16 @@ public class PlayerController : MonoBehaviour
         if (onBoat)
         {
             transform.position = boat.position + boatPositionOffset;
+        }
+    }
+    private void BreakUnknown(Vector2 position)
+    {
+        Vector3Int cell = breakUnknownTiles.WorldToCell(position);
+        TileBase tile = breakUnknownTiles.GetTile(cell);
+        if (tile != null)
+        {
+            Instantiate(breakUnknownPrefabs, position, Quaternion.identity);
+            breakUnknownTiles.SetTile(cell, null);
         }
     }
 }
