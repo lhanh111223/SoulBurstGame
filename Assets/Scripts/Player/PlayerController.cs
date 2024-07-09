@@ -4,7 +4,6 @@ using UnityEngine.Tilemaps;
 public class PlayerController : MonoBehaviour
 {
     public Transform boat;
-    public Transform boatSeat;
     public float maxDistanceToF = 2f;
     private bool onBoat = false;
     public float speed = 5f;
@@ -22,27 +21,14 @@ public class PlayerController : MonoBehaviour
         _anim = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
         boatPositionOffset = transform.position - boat.position;
-        boatController = boat.GetComponent<BoatController>(); 
+        boatController = boat.GetComponent<BoatController>();
     }
 
     void Update()
     {
-        Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
-        _rb.velocity = movement * speed;
-        if (movement != Vector2.zero)
-        {
-            _anim.SetFloat("moveX", movement.x);
-            _anim.SetFloat("moveY", movement.y);
-            _anim.SetBool("run", true);
-        }
-        else
-        {
-            _anim.SetBool("run", false);
-        }
-
         float distanceToBoat = Vector2.Distance(transform.position, boat.position);
 
-        if (distanceToBoat <= maxDistanceToF && !boatController.IsMoving()) 
+        if (distanceToBoat <= maxDistanceToF && !boatController.IsMoving())
         {
             canPressF = true;
         }
@@ -55,7 +41,8 @@ public class PlayerController : MonoBehaviour
         {
             if (!onBoat)
             {
-                transform.position = boatSeat.position;
+                // Đặt vị trí tại tọa độ cụ thể so với thuyền
+                transform.position = boat.position + new Vector3(-0.4099998f, -0.05f, 0f);
                 boatPositionOffset = transform.position - boat.position;
                 onBoat = true;
 
@@ -77,6 +64,7 @@ public class PlayerController : MonoBehaviour
             transform.position = boat.position + boatPositionOffset;
         }
     }
+
     private void BreakUnknown(Vector2 position)
     {
         Vector3Int cell = breakUnknownTiles.WorldToCell(position);
