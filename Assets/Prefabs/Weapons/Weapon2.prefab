@@ -103,7 +103,7 @@ MonoBehaviour:
   TimeBetweenFire: 1
   BulletForce: 9
   LazerLength: 8
-  maxLaserDistance: 100
+  LazerLongTime: 0.1
 --- !u!1 &4272762548677942545
 GameObject:
   m_ObjectHideFlags: 0
