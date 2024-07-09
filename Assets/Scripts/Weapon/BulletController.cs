@@ -11,6 +11,7 @@ public class BulletController : MonoBehaviour
     }
 
     public BulletType bulletType;
+    public WeaponBreakUnknownController weaponBreakController;
 
     Renderer rend;
     Rigidbody2D rb;
@@ -35,6 +36,7 @@ public class BulletController : MonoBehaviour
             edgeCollider = GetComponent<EdgeCollider2D>();
             UpdateCollider();
         }
+        weaponBreakController = FindObjectOfType<WeaponBreakUnknownController>();
     }
 
     // Update is called once per frame
@@ -77,6 +79,13 @@ public class BulletController : MonoBehaviour
             // Player
             if (collision.gameObject.tag == "Player")
             {
+                Destroy(gameObject);
+            }
+            // Break Unknown Tile
+            if (collision.gameObject.CompareTag("Unknown"))
+            {
+                Vector2 collisionPoint = collision.GetContact(0).point;
+                weaponBreakController.BreakUnknown(collisionPoint);
                 Destroy(gameObject);
             }
         }

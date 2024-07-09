@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6971471583180016219}
   - component: {fileID: 4796990915027541856}
   - component: {fileID: 2335221325908994431}
+  - component: {fileID: -8660504107843850614}
   m_Layer: 0
   m_Name: Fire
   m_TagString: Untagged
@@ -95,7 +96,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -4
   m_Sprite: {fileID: 183610919, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -120,3 +121,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
+--- !u!114 &-8660504107843850614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7847041296357676247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12600fb46af381e4bbb5820ff05e6efe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleSprite: {fileID: 183610919, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
+  animationSprites:
+  - {fileID: 183610919, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
+  - {fileID: -881354982, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
+  - {fileID: -194424576, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
+  - {fileID: 1798679082, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
+  - {fileID: -558207286, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
+  - {fileID: 1798679082, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
+  - {fileID: -194424576, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
+  - {fileID: -881354982, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
+  - {fileID: -194424576, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
+  - {fileID: 1798679082, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
+  - {fileID: -558207286, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
+  - {fileID: -1370650555, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
+  - {fileID: 1328202015, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
+  - {fileID: 1664402235, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
+  - {fileID: 0}
+  animationTime: 0.125
+  loop: 0
+  idle: 0

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4066853108244376674}
   - component: {fileID: 3960912350077567964}
   - component: {fileID: -855164912331891270}
+  - component: {fileID: 5261045661990415880}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -4
   m_Sprite: {fileID: -353966317, guid: 3553e7f9af032e047bbfff69486a7893, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -120,3 +121,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+--- !u!114 &5261045661990415880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2226484882216524183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12600fb46af381e4bbb5820ff05e6efe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleSprite: {fileID: -353966317, guid: 3553e7f9af032e047bbfff69486a7893, type: 3}
+  animationSprites:
+  - {fileID: -353966317, guid: 3553e7f9af032e047bbfff69486a7893, type: 3}
+  - {fileID: -161328378, guid: 3553e7f9af032e047bbfff69486a7893, type: 3}
+  - {fileID: 1213859741, guid: 3553e7f9af032e047bbfff69486a7893, type: 3}
+  - {fileID: 899944761, guid: 3553e7f9af032e047bbfff69486a7893, type: 3}
+  - {fileID: -1206611667, guid: 3553e7f9af032e047bbfff69486a7893, type: 3}
+  - {fileID: 1211704826, guid: 3553e7f9af032e047bbfff69486a7893, type: 3}
+  - {fileID: 470080957, guid: 3553e7f9af032e047bbfff69486a7893, type: 3}
+  - {fileID: 1915034909, guid: 3553e7f9af032e047bbfff69486a7893, type: 3}
+  - {fileID: 1243044339, guid: 3553e7f9af032e047bbfff69486a7893, type: 3}
+  - {fileID: 1956783081, guid: 3553e7f9af032e047bbfff69486a7893, type: 3}
+  - {fileID: -1512951919, guid: 3553e7f9af032e047bbfff69486a7893, type: 3}
+  - {fileID: 419417339, guid: 3553e7f9af032e047bbfff69486a7893, type: 3}
+  animationTime: 0.1
+  loop: 1
+  idle: 0
