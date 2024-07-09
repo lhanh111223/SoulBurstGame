@@ -8,6 +8,10 @@ public class Player : MonoBehaviour
     public CharacterDatabase characterDB;
     public SpriteRenderer artworkSprite;
     private int selectedOption = 0;
+
+    // Mana - HP
+    public int Health;
+    public int Mana;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,11 +24,19 @@ public class Player : MonoBehaviour
             Load();
         }
         Instantiate(characterDB.GetCharacter(selectedOption).playerPrefab, transform.position, Quaternion.identity);
+
+        Health = 100;
+        Mana = 100;
     }
 
     private void Load()
     {
         selectedOption = PlayerPrefs.GetInt("selectedOption");
+    }
+
+    public void DecreaseMana(int value)
+    {
+        Mana -= value;
     }
 
 }

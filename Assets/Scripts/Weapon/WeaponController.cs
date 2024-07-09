@@ -5,20 +5,30 @@ using static BulletController;
 
 public class WeaponController : MonoBehaviour
 {
+    [Header("Attack")]
     public GameObject Bullet;
     public Transform FirePoint;
     public float TimeBetweenFire;
     public float BulletForce;
     public int LazerLength;
-    //public LineRenderer lineRenderer;
 
+    [Header("Lazer")]
+    public float LazerLongTime;
     LineRenderer lineRenderer;
     EdgeCollider2D edgeCollider;
 
+    // Time and Type
     float _timeBetweenFire;
     float localScaleY_Weapon;
     string _bulletType;
     GameObject lazer;
+
+    // Lazer Timer
+    float _lazerLongTime;
+    // Player HP - Mana
+    Player player;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -28,11 +38,14 @@ public class WeaponController : MonoBehaviour
         _bulletType = Bullet.GetComponent<BulletController>().bulletType.ToString();
         lazer = Instantiate(Bullet, FirePoint.position, Quaternion.identity);
         lazer.SetActive(false);
-        if(_bulletType == "Lazer")
+        if (_bulletType == "Lazer")
         {
             lineRenderer = lazer.GetComponent<LineRenderer>();
             edgeCollider = lazer.GetComponent<EdgeCollider2D>();
+            _lazerLongTime = LazerLongTime;
         }
+        player = FindAnyObjectByType<Player>();
+        
     }
 
     public GameObject getLazer()
@@ -49,10 +62,17 @@ public class WeaponController : MonoBehaviour
         {
             if (_bulletType == "Lazer")
             {
-                lazer.SetActive(true);
-                lazer.GetComponent<LineRenderer>().enabled = true;
-                lineRenderer = lazer.GetComponent<LineRenderer>();
-                FireWithLazerLength();
+                if(player.Mana > 0)
+                {
+                    lazer.SetActive(true);
+                    lazer.GetComponent<LineRenderer>().enabled = true;
+                    lineRenderer = lazer.GetComponent<LineRenderer>();
+                    FireWithLazerLength();
+                }
+                else
+                {
+                    lazer.SetActive(false);
+                }
             }
             else
             {
@@ -88,6 +108,8 @@ public class WeaponController : MonoBehaviour
     // Fire bullet|lazer
     void FireBullet()
     {
+        player.DecreaseMana(10);
+
         _timeBetweenFire = TimeBetweenFire;
         GameObject bulletTmp = Instantiate(Bullet, FirePoint.position, Quaternion.identity);
         Rigidbody2D rb = bulletTmp.GetComponent<Rigidbody2D>();
@@ -96,9 +118,18 @@ public class WeaponController : MonoBehaviour
 
     }
 
-    // Lazer 
+    //Lazer
     void FireWithLazerLength()
     {
+        if (player.Mana <= 0) return;
+
+        _lazerLongTime -= Time.deltaTime;
+        if(_lazerLongTime < 0)
+        {
+            player.DecreaseMana(1);
+            _lazerLongTime = LazerLongTime;
+        }
+
         RaycastHit2D hit = Physics2D.Raycast(FirePoint.position, FirePoint.right);
         lineRenderer.SetPosition(0, FirePoint.position);
 
@@ -121,6 +152,8 @@ public class WeaponController : MonoBehaviour
         }
         UpdateCollider();
     }
+
+
 
     void UpdateCollider()
     {
