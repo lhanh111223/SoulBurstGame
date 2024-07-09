@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -61,7 +61,6 @@ public class BulletController : MonoBehaviour
                 // Take Damage to enemy
                 Destroy(gameObject);
             }
-
             // Wall
             if (collision.gameObject.tag == "Wall")
             {
@@ -74,7 +73,6 @@ public class BulletController : MonoBehaviour
                 }
 
             }
-
             // Player
             if (collision.gameObject.tag == "Player")
             {
@@ -96,5 +94,17 @@ public class BulletController : MonoBehaviour
         }
 
         edgeCollider.points = colliderPoints;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (bulletType == BulletType.Lazer)
+        {
+            if (collision.gameObject.tag == "Enemy")
+            {
+                // Take Damage to enemy
+                Debug.Log("Hit Enemy");
+            }
+        }
     }
 }
