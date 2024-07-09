@@ -1,98 +1,88 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Pathfinding;
 
 public class EnemyAI : MonoBehaviour
 {
+    public float moveSpeed = 3f; 
+    public float nextWPDistance = 1f;
+    public SpriteRenderer characterSR;
     private Rigidbody2D _rb;
     private Animator _anim;
     public Transform player;
-    public float moveSpeed = 3.0f;
-    public float attackCooldown = 1.0f;
-    private bool isAttacking = false;
-    private bool isPlayerInRange = false;
+
+    public Seeker seeker;
+    Path path;
+    Coroutine moveCoutine;
 
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
-        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-        if (playerObject != null)
-        {
-            player = playerObject.transform;
-        }
-    }
-
-    void Update()
-    {
+        player = GameObject.FindWithTag("Player").transform;
+        seeker = GetComponent<Seeker>();
         if (player != null)
         {
-            if (isPlayerInRange)
+            InvokeRepeating("CalculatePath", 0f, 1f);
+        }
+        
+    }
+
+    void CalculatePath()
+    {
+        if (seeker.IsDone() && player != null)
+        {
+            seeker.StartPath(transform.position, player.position, OnPathCallback);
+        }
+        
+    }
+
+    void OnPathCallback(Path p)
+    {
+        if (p.error)
+        {
+            return;
+        }
+        path = p;
+        MoveToTarget();
+    }
+
+    void MoveToTarget()
+    {
+        if (moveCoutine != null)
+        {
+            StopCoroutine(moveCoutine);
+        }
+        moveCoutine = StartCoroutine(MoveToTargetCoroutine());
+    }
+
+    IEnumerator MoveToTargetCoroutine()
+    {
+        int currentWP = 0;
+        while (path != null && currentWP < path.vectorPath.Count)
+        {
+            Vector2 direction = ((Vector2)path.vectorPath[currentWP] - (Vector2)transform.position).normalized;
+            Vector3 force = direction * moveSpeed * Time.deltaTime;
+            transform.position += force;
+            float distance = Vector2.Distance(transform.position, path.vectorPath[currentWP]);
+
+            if (distance < nextWPDistance) 
             {
-                if (!isAttacking)
+                currentWP++;
+                
+                if (currentWP >= path.vectorPath.Count)
                 {
-                    StartCoroutine(AttackPlayer());
+                    yield break;
                 }
             }
-            else
+
+            
+            if (force.x != 0)
             {
-                MoveTowardsPlayer();
+                characterSR.flipX = force.x < 0; 
             }
 
-            if (player.position.x < transform.position.x)
-            {
-                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            }
-            else
-            {
-                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            }
-        }
-    }
-
-    void MoveTowardsPlayer()
-    {
-        _anim.SetBool("isMoving", true);
-        _anim.SetBool("isAttack", false);
-        Vector2 direction = ((Vector2)player.position - (Vector2)transform.position).normalized;
-        _rb.MovePosition((Vector2)transform.position + direction * moveSpeed * Time.deltaTime);
-    }
-
-    IEnumerator AttackPlayer()
-    {
-        isAttacking = true;
-        _anim.SetBool("isMoving", false);
-        _anim.SetBool("isAttack", true);
-        yield return new WaitForSeconds(attackCooldown);
-        isAttacking = false;
-    }
-
-    void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.CompareTag("Player"))
-        {
-            isPlayerInRange = true;
-            _anim.SetBool("isAttack", true);
-        }
-    }
-
-    void OnTriggerStay2D(Collider2D collider)
-    {
-        if (collider.CompareTag("Player"))
-        {
-            isPlayerInRange = true;
-            if (!isAttacking)
-            {
-                StartCoroutine(AttackPlayer());
-            }
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D collider)
-    {
-        if (collider.CompareTag("Player"))
-        {
-            isPlayerInRange = false;
-            _anim.SetBool("isAttack", false);
+            yield return null;
         }
     }
 

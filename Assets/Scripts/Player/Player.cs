@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class Player : MonoBehaviour
     // Mana - HP
     public int Health;
     public int Mana;
+    public CinemachineVirtualCamera virtualCamera;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +29,8 @@ public class Player : MonoBehaviour
 
         Health = 100;
         Mana = 100;
+        GameObject player = Instantiate(characterDB.GetCharacter(selectedOption).playerPrefab, transform.position, Quaternion.identity);
+        virtualCamera.Follow = player.transform;
     }
 
     private void Load()
