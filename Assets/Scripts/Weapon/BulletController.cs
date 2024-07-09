@@ -44,6 +44,7 @@ public class BulletController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
 
         if (bulletType == BulletType.Lazer)
         {
