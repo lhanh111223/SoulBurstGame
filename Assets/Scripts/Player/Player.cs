@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class Player : MonoBehaviour
     public CharacterDatabase characterDB;
     public SpriteRenderer artworkSprite;
     private int selectedOption = 0;
+    public CinemachineVirtualCamera virtualCamera;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +21,8 @@ public class Player : MonoBehaviour
         {
             Load();
         }
-        Instantiate(characterDB.GetCharacter(selectedOption).playerPrefab, transform.position, Quaternion.identity);
+        GameObject player = Instantiate(characterDB.GetCharacter(selectedOption).playerPrefab, transform.position, Quaternion.identity);
+        virtualCamera.Follow = player.transform;
     }
 
     private void Load()
