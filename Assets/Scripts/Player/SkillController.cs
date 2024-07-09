@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SkillController : MonoBehaviour
 {
+    public GameObject Skill;
+    public GameObject Target;
+
     // Start is called before the first frame update
     void Start()
     {

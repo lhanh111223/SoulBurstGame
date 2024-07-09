@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static BulletController;
 
 public class WeaponController : MonoBehaviour
 {
@@ -10,14 +11,14 @@ public class WeaponController : MonoBehaviour
     public float BulletForce;
     public int LazerLength;
     //public LineRenderer lineRenderer;
-    public float maxLaserDistance = 100f;  // Khoảng cách tối đa của tia laser
 
     LineRenderer lineRenderer;
+    EdgeCollider2D edgeCollider;
+
     float _timeBetweenFire;
     float localScaleY_Weapon;
     string _bulletType;
     GameObject lazer;
-
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +28,16 @@ public class WeaponController : MonoBehaviour
         _bulletType = Bullet.GetComponent<BulletController>().bulletType.ToString();
         lazer = Instantiate(Bullet, FirePoint.position, Quaternion.identity);
         lazer.SetActive(false);
-        
+        if(_bulletType == "Lazer")
+        {
+            lineRenderer = lazer.GetComponent<LineRenderer>();
+            edgeCollider = lazer.GetComponent<EdgeCollider2D>();
+        }
+    }
+
+    public GameObject getLazer()
+    {
+        return lazer;
     }
 
     // Update is called once per frame
@@ -54,7 +64,7 @@ public class WeaponController : MonoBehaviour
         {
             lazer.SetActive(false);
         }
-        
+
     }
 
     // Rotate weapon
@@ -79,18 +89,11 @@ public class WeaponController : MonoBehaviour
     void FireBullet()
     {
         _timeBetweenFire = TimeBetweenFire;
-        // Effect
-        if (_bulletType == "Lazer")
-        {
-            //FireWithLazerLength();
-        }
-        else
-        {
-            GameObject bulletTmp = Instantiate(Bullet, FirePoint.position, Quaternion.identity);
-            Rigidbody2D rb = bulletTmp.GetComponent<Rigidbody2D>();
-            bulletTmp.transform.rotation = transform.rotation;
-            rb.AddForce(transform.right * BulletForce, ForceMode2D.Impulse);
-        }
+        GameObject bulletTmp = Instantiate(Bullet, FirePoint.position, Quaternion.identity);
+        Rigidbody2D rb = bulletTmp.GetComponent<Rigidbody2D>();
+        bulletTmp.transform.rotation = transform.rotation;
+        rb.AddForce(transform.right * BulletForce, ForceMode2D.Impulse);
+
     }
 
     // Lazer 
@@ -116,7 +119,28 @@ public class WeaponController : MonoBehaviour
         {
             lineRenderer.SetPosition(1, FirePoint.position + FirePoint.right * 100);
         }
+        UpdateCollider();
     }
 
+    void UpdateCollider()
+    {
+        if (lineRenderer.enabled)
+        {
+            Vector3[] positions = new Vector3[lineRenderer.positionCount];
+            lineRenderer.GetPositions(positions);
+
+            Vector2[] colliderPoints = new Vector2[positions.Length];
+            for (int i = 0; i < positions.Length; i++)
+            {
+                colliderPoints[i] = new Vector2(positions[i].x, positions[i].y);
+            }
+
+            edgeCollider.points = colliderPoints;
+        }
+        else
+        {
+            edgeCollider.points = new Vector2[0]; // Clear the collider points if the laser is not active
+        }
+    }
 
 }

@@ -24,8 +24,10 @@ public class PickupController : MonoBehaviour
         {
             Destroy(GetComponentInChildren<WeaponController>().gameObject);
         }
-
+        if (gameObject.name.Contains("PlayerKnight"))
+        {
+            offsetWeapon2Body = new Vector3(0, -0.6f, 0);
+        }
         Instantiate(Weapons[weapon - 1], gameObject.transform.position + offsetWeapon2Body, Quaternion.identity, gameObject.transform);
-
     }
 }
