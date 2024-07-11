@@ -14,6 +14,9 @@ public class Player : MonoBehaviour
     public int Health;
     public int Mana;
     public CinemachineVirtualCamera virtualCamera;
+
+    GameObject _player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,12 +28,13 @@ public class Player : MonoBehaviour
         {
             Load();
         }
-        Instantiate(characterDB.GetCharacter(selectedOption).playerPrefab, transform.position, Quaternion.identity);
+        
 
         Health = 100;
         Mana = 100;
-        GameObject player = Instantiate(characterDB.GetCharacter(selectedOption).playerPrefab, transform.position, Quaternion.identity);
-        virtualCamera.Follow = player.transform;
+        _player = Instantiate(characterDB.GetCharacter(selectedOption).playerPrefab, transform.position, Quaternion.identity);
+        virtualCamera.Follow = _player.transform;
+
     }
 
     private void Load()
@@ -41,6 +45,12 @@ public class Player : MonoBehaviour
     public void DecreaseMana(int value)
     {
         Mana -= value;
+    }
+
+    // Get player
+    public GameObject GetPlayer()
+    {
+        return _player;
     }
 
 }

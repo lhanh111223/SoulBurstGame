@@ -119,6 +119,7 @@ GameObject:
   - component: {fileID: 7948441065285255245}
   - component: {fileID: 2335811224744752523}
   - component: {fileID: 8312289674149212069}
+  - component: {fileID: 8610849243369641522}
   m_Layer: 0
   m_Name: PlayerNinja
   m_TagString: Player
@@ -135,12 +136,11 @@ Transform:
   m_GameObject: {fileID: 2958298982892160405}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03, y: 0.14, z: 0.045908365}
+  m_LocalPosition: {x: 0.03, y: 0.14, z: 0.04590837}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6573858611512093487}
-  - {fileID: 6608803706830191796}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &6397319197477843466
@@ -202,7 +202,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.028589308, y: -0.13738194}
+  m_Offset: {x: -0.02858931, y: -0.1373819}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -213,7 +213,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4853896, y: 0.57624084}
+  m_Size: {x: 0.4853896, y: 0.5762408}
   m_EdgeRadius: 0
 --- !u!114 &2335811224744752523
 MonoBehaviour:
@@ -252,65 +252,19 @@ MonoBehaviour:
   Weapons:
   - {fileID: 816248869614184872, guid: d647095abcb885c44a8a24455c251fe3, type: 3}
   - {fileID: 3849317594562541899, guid: 9a6d6338cd2885d4e8c9286ff8455d94, type: 3}
---- !u!1001 &4870392682428085543
-PrefabInstance:
+--- !u!114 &8610849243369641522
+MonoBehaviour:
   m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 4875342890028945051}
-    m_Modifications:
-    - target: {fileID: 1738446234813483411, guid: d683adf59592fdf46ab8d7603ac6aa49, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738446234813483411, guid: d683adf59592fdf46ab8d7603ac6aa49, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738446234813483411, guid: d683adf59592fdf46ab8d7603ac6aa49, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738446234813483411, guid: d683adf59592fdf46ab8d7603ac6aa49, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738446234813483411, guid: d683adf59592fdf46ab8d7603ac6aa49, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738446234813483411, guid: d683adf59592fdf46ab8d7603ac6aa49, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738446234813483411, guid: d683adf59592fdf46ab8d7603ac6aa49, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738446234813483411, guid: d683adf59592fdf46ab8d7603ac6aa49, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738446234813483411, guid: d683adf59592fdf46ab8d7603ac6aa49, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738446234813483411, guid: d683adf59592fdf46ab8d7603ac6aa49, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8732169640382567550, guid: d683adf59592fdf46ab8d7603ac6aa49, type: 3}
-      propertyPath: m_Name
-      value: NinjaSkill
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d683adf59592fdf46ab8d7603ac6aa49, type: 3}
---- !u!4 &6608803706830191796 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1738446234813483411, guid: d683adf59592fdf46ab8d7603ac6aa49, type: 3}
-  m_PrefabInstance: {fileID: 4870392682428085543}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2958298982892160405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e06372e3d3a19641a7546c411021c4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Skill: {fileID: 8732169640382567550, guid: d683adf59592fdf46ab8d7603ac6aa49, type: 3}
+  Target: {fileID: 0}
+  inputSkill: 304
+  SkillDuration: 5

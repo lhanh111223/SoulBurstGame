@@ -21,13 +21,15 @@ public class MovementController : MonoBehaviour
     public float DashTime;
     float _dashTime;
     bool _isDashing;
+    Coroutine dashEffectCoroutine;
 
     // Internal Variables
     Animator animator;
     Rigidbody2D rb;
     float _localScaleX;
-    // Dash
-    Coroutine dashEffectCoroutine;
+
+    // Normal Attack
+    float _timeNormalAttack = 1f;
 
     private void Start()
     {
@@ -37,6 +39,7 @@ public class MovementController : MonoBehaviour
         this.animator = GetComponentInChildren<Animator>();
         this.rb = GetComponent<Rigidbody2D>();
         this._localScaleX = BodyPlayer.localScale.x;
+
     }
 
     private void Update()
@@ -98,8 +101,11 @@ public class MovementController : MonoBehaviour
             _dashTime -= Time.deltaTime;
         }
 
-
+        // Normal Attack 
+        
     }
+
+    
 
     // Dashing effect
     void StopDashEffect()
@@ -151,4 +157,6 @@ public class MovementController : MonoBehaviour
         }
     }
 
+    // Normal attack
+    
 }
