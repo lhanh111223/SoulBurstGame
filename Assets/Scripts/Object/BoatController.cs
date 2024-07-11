@@ -13,7 +13,7 @@ public class BoatController : MonoBehaviour
     private GameObject player;
     private bool playerOnBoat = false;
     private bool isMoving = false;
-    private bool boardKeyPressed = false; // Biến theo dõi số lần phím F đã được nhấn
+    private bool boardKeyPressed = false; 
 
     void Update()
     {
@@ -49,10 +49,10 @@ public class BoatController : MonoBehaviour
 
     void BoardBoat()
     {
-        player.transform.position = boatSeat.position; // Đặt vị trí của người chơi lên vị trí ghế ngồi trên thuyền
-        player.GetComponent<Collider2D>().isTrigger = true; // Kích hoạt trigger của người chơi
-        playerOnBoat = true; // Đánh dấu rằng người chơi đã lên thuyền
-        boardKeyPressed = true; // Đánh dấu rằng phím F đã được nhấn
+        player.transform.position = boatSeat.position; 
+        player.GetComponent<Collider2D>().isTrigger = true; 
+        playerOnBoat = true; 
+        boardKeyPressed = true; 
         StartMoving();
     }
 
@@ -78,7 +78,7 @@ public class BoatController : MonoBehaviour
         if (player != null)
         {
             player.transform.position = boatSeat.position;
-            player.GetComponent<Collider2D>().isTrigger = false; // Tắt trigger của người chơi
+            player.GetComponent<Collider2D>().isTrigger = false; 
             playerOnBoat = false;
             isMoving = false;
         }
@@ -88,7 +88,7 @@ public class BoatController : MonoBehaviour
     {
         if (playerOnBoat && player != null)
         {
-            player.transform.position = boatSeat.position; // Đồng bộ vị trí của người chơi với vị trí ghế ngồi trên thuyền
+            player.transform.position = boatSeat.position; 
         }
     }
 }
