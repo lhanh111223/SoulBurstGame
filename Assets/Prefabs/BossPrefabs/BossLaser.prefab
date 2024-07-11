@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6249871855551965726}
   - component: {fileID: 6383443488098879124}
   - component: {fileID: 4173148615934394295}
+  - component: {fileID: 8677932110527706071}
   m_Layer: 0
   m_Name: BossLaser
   m_TagString: Untagged
@@ -106,3 +107,80 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!60 &8677932110527706071
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3688834699913497124}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4.6875, y: 1.5625}
+    newSize: {x: 9.375, y: 3.125}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -1.6791344, y: 0.5056529}
+      - {x: -1.7331018, y: 0.40126407}
+      - {x: -1.7608061, y: 0.28218925}
+      - {x: -1.7121582, y: 0.16428232}
+      - {x: -1.3674078, y: 0.11580044}
+      - {x: -1.0299187, y: 0.1284281}
+      - {x: 2.295269, y: 0.13707912}
+      - {x: 2.2744904, y: 0.38563907}
+      - {x: -1.0099115, y: 0.39483857}
+    - - {x: -1.6875, y: 0.0625}
+      - {x: -1.796875, y: 0.21875}
+      - {x: -1.8125, y: 0.359375}
+      - {x: -1.796875, y: 0.375}
+      - {x: -1.765625, y: 0.453125}
+      - {x: -1.609375, y: 0.5625}
+      - {x: -1.46875, y: 0.578125}
+      - {x: -1.453125, y: 0.5625}
+      - {x: -1.375, y: 0.53125}
+      - {x: -1.296875, y: 0.46875}
+      - {x: -1.453125, y: 0.515625}
+      - {x: -1.578125, y: 0.515625}
+      - {x: -1.625, y: 0.5}
+      - {x: -1.734375, y: 0.390625}
+      - {x: -1.75, y: 0.34375}
+      - {x: -1.75, y: 0.234375}
+      - {x: -1.734375, y: 0.1875}
+      - {x: -1.625, y: 0.078125}
+      - {x: -1.578125, y: 0.0625}
+      - {x: -1.453125, y: 0.0625}
+      - {x: -1.3125, y: 0.109375}
+      - {x: -1.421875, y: 0.03125}
+      - {x: -1.609375, y: 0.03125}
+  m_UseDelaunayMesh: 0

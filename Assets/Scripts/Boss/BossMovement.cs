@@ -11,6 +11,8 @@ public class BossMovement : MonoBehaviour
     Coroutine moveCoroutine;
     public float moveSpeed = 3.0f;
 
+    public float PlayerDistance = 4f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,11 +26,7 @@ public class BossMovement : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
     private void CalculatePath()
     {
 
@@ -73,7 +71,7 @@ public class BossMovement : MonoBehaviour
 
             float distance = Vector2.Distance(transform.position, path.vectorPath[currentWP]);
 
-            if (distance < 0.5)
+            if (distance < PlayerDistance)
             {
                 currentWP++;
             }
