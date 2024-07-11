@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
         {
             Load();
         }
-        
+        //Instantiate(characterDB.GetCharacter(selectedOption).playerPrefab, transform.position, Quaternion.identity);
 
         Health = 100;
         Mana = 100;
