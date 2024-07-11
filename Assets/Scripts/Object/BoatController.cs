@@ -2,34 +2,30 @@
 
 public class BoatController : MonoBehaviour
 {
-    public Transform boat; // Boat transform để di chuyển player lên thuyền
-    public Transform boatSeat; // Vị trí trên thuyền mà player sẽ ngồi
-    public KeyCode boardKey = KeyCode.F; // Phím để lên thuyền
+    public Transform boat;
+    public Transform boatSeat;
+    public KeyCode boardKey = KeyCode.F;
 
-    public Transform destinationPoint; // Điểm đến của thuyền
-    public float speed = 5f; // Tốc độ di chuyển của thuyền
+    public Transform destinationPoint;
+    public float speed = 5f;
 
-    private bool isPlayerNearby = false; // Kiểm tra xem player có ở gần thuyền không
-    private GameObject player; // Đối tượng player
-    private bool playerOnBoat = false; // Biến cờ để kiểm tra xem player đã lên thuyền chưa
-    private bool reachedDestination = false; // Biến cờ để kiểm tra xem thuyền đã đến điểm đến chưa
-    private bool isMoving = false; // Biến cờ để kiểm tra xem thuyền đang di chuyển đến điểm đến hay không
+    private bool isPlayerNearby = false;
+    private GameObject player;
+    private bool playerOnBoat = false;
+    private bool isMoving = false;
+    private bool boardKeyPressed = false; // Biến theo dõi số lần phím F đã được nhấn
 
     void Update()
     {
-        if (isPlayerNearby && Input.GetKeyDown(boardKey) && !isMoving && !playerOnBoat)
+        if (isPlayerNearby && Input.GetKeyDown(boardKey) && !boardKeyPressed)
         {
-            StartMoving();
+            BoardBoat();
         }
 
         if (isMoving)
         {
             MoveToDestination();
-            SyncPlayerWithBoat(); // Đồng bộ hóa vị trí của player với thuyền
-        }
-        else if (isPlayerNearby && Input.GetKeyDown(boardKey) && playerOnBoat)
-        {
-            ExitBoat();
+            SyncPlayerWithBoat();
         }
     }
 
@@ -51,10 +47,18 @@ public class BoatController : MonoBehaviour
         }
     }
 
+    void BoardBoat()
+    {
+        player.transform.position = boatSeat.position; // Đặt vị trí của người chơi lên vị trí ghế ngồi trên thuyền
+        player.GetComponent<Collider2D>().isTrigger = true; // Kích hoạt trigger của người chơi
+        playerOnBoat = true; // Đánh dấu rằng người chơi đã lên thuyền
+        boardKeyPressed = true; // Đánh dấu rằng phím F đã được nhấn
+        StartMoving();
+    }
+
     void StartMoving()
     {
-        isMoving = true; // Bắt đầu di chuyển thuyền đến điểm đến
-        reachedDestination = false; // Đặt lại trạng thái reachedDestination
+        isMoving = true;
     }
 
     void MoveToDestination()
@@ -64,8 +68,8 @@ public class BoatController : MonoBehaviour
 
         if (boat.position == destinationPoint.position)
         {
-            reachedDestination = true;
-            isMoving = false; // Dừng di chuyển khi đến điểm đến
+            isMoving = false;
+            ExitBoat();
         }
     }
 
@@ -73,11 +77,10 @@ public class BoatController : MonoBehaviour
     {
         if (player != null)
         {
-            player.transform.position = boatSeat.position; // Di chuyển player lên vị trí ngồi trên thuyền
-            // Tắt hoặc vô hiệu hóa các script di chuyển của player nếu cần
-            playerOnBoat = false; // Đánh dấu là player đã rời khỏi thuyền
-            reachedDestination = false; // Cho phép thuyền di chuyển đến điểm đích tiếp theo nếu cần
-            isMoving = false; // Dừng di chuyển thuyền nếu người chơi rời khỏi
+            player.transform.position = boatSeat.position;
+            player.GetComponent<Collider2D>().isTrigger = false; // Tắt trigger của người chơi
+            playerOnBoat = false;
+            isMoving = false;
         }
     }
 
@@ -85,8 +88,7 @@ public class BoatController : MonoBehaviour
     {
         if (playerOnBoat && player != null)
         {
-            Vector3 offset = boat.position - transform.position;
-            player.transform.position += offset;
+            player.transform.position = boatSeat.position; // Đồng bộ vị trí của người chơi với vị trí ghế ngồi trên thuyền
         }
     }
 }
