@@ -136,7 +136,7 @@ Transform:
   m_GameObject: {fileID: 8235076804602603724}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.524, y: 0.149, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -264,8 +264,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 930cf218590e251438c4972517d44e2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  breakUnknownTiles: {fileID: 0}
   breakUnknownPrefabs: {fileID: 3246659033887597132, guid: 5efcd1f4764c58b40a9bb664d329ea09, type: 3}

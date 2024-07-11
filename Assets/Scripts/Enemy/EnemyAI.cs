@@ -1,109 +1,60 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Pathfinding;
 
 public class EnemyAI : MonoBehaviour
 {
-    public float moveSpeed = 3f;
-    public float nextWPDistance = 1f;
-    public float attackRange = 1f;
-    public float attackCooldown = 1f;
-    public SpriteRenderer characterSR;
     private Rigidbody2D _rb;
     private Animator _anim;
     public Transform player;
-
-    public Seeker seeker;
-    Path path;
-    Coroutine moveCoroutine;
-    bool isAttacking = false;
-    bool isPlayerInRange = false;
+    public float moveSpeed = 3.0f;
+    public float attackCooldown = 1.0f;
+    private bool isAttacking = false;
+    private bool isPlayerInRange = false;
 
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
-        player = GameObject.FindWithTag("Player").transform;
-        seeker = GetComponent<Seeker>();
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+        {
+            player = playerObject.transform;
+        }
+    }
+
+    void Update()
+    {
         if (player != null)
         {
-            InvokeRepeating("CalculatePath", 0f, 1f);
-        }
-    }
-
-    void CalculatePath()
-    {
-        if (seeker.IsDone() && player != null)
-        {
-            seeker.StartPath(transform.position, player.position, OnPathCallback);
-        }
-    }
-
-    void OnPathCallback(Path p)
-    {
-        if (p.error)
-        {
-            return;
-        }
-        path = p;
-        MoveToTarget();
-    }
-
-    void MoveToTarget()
-    {
-        if (moveCoroutine != null)
-        {
-            StopCoroutine(moveCoroutine);
-        }
-        moveCoroutine = StartCoroutine(MoveToTargetCoroutine());
-    }
-
-    IEnumerator MoveToTargetCoroutine()
-    {
-        int currentWP = 0;
-        while (path != null && currentWP < path.vectorPath.Count)
-        {
-            if (isAttacking)
+            if (isPlayerInRange)
             {
-                yield return null;
-                continue;
-            }
-
-            Vector2 direction = ((Vector2)path.vectorPath[currentWP] - (Vector2)transform.position).normalized;
-            Vector3 force = direction * moveSpeed * Time.deltaTime;
-            transform.position += force;
-            float distance = Vector2.Distance(transform.position, path.vectorPath[currentWP]);
-
-            if (distance < nextWPDistance)
-            {
-                currentWP++;
-
-                if (currentWP >= path.vectorPath.Count)
+                if (!isAttacking)
                 {
-                    yield break;
+                    StartCoroutine(AttackPlayer());
                 }
-            }
-
-            if (force.x != 0)
-            {
-                characterSR.flipX = force.x < 0;
-            }
-
-            float playerDistance = Vector2.Distance(transform.position, player.position);
-            if (playerDistance < attackRange)
-            {
-                isPlayerInRange = true;
-                StartCoroutine(AttackPlayer());
             }
             else
             {
-                isPlayerInRange = false;
-                _anim.SetBool("isMoving", true);
-                _anim.SetBool("isAttack", false);
+                MoveTowardsPlayer();
             }
 
-            yield return null;
+            if (player.position.x < transform.position.x)
+            {
+                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
+            else
+            {
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
         }
+    }
+
+    void MoveTowardsPlayer()
+    {
+        _anim.SetBool("isMoving", true);
+        _anim.SetBool("isAttack", false);
+        Vector2 direction = ((Vector2)player.position - (Vector2)transform.position) * moveSpeed;
+        _rb.MovePosition((Vector2)transform.position + direction * moveSpeed * Time.deltaTime);
     }
 
     IEnumerator AttackPlayer()
@@ -144,4 +95,5 @@ public class EnemyAI : MonoBehaviour
             _anim.SetBool("isAttack", false);
         }
     }
+
 }

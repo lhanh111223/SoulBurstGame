@@ -125,13 +125,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb5c1b9a401f16747958dbd2e78e66d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
-  nextWPDistance: 1
-  attackRange: 1
-  attackCooldown: 1
-  characterSR: {fileID: 885553913584145665}
   player: {fileID: 0}
-  seeker: {fileID: -2259447691280085429}
+  moveSpeed: 5
+  attackCooldown: 1
 --- !u!61 &186414770334583512
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -239,7 +235,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3207213889874661136}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6eb1402c17e84a9282a7f0f62eb584f, type: 3}
   m_Name: 
