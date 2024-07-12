@@ -8,6 +8,8 @@ TagManager:
   - Wall
   - Weapon
   - Unknown
+  - Undefined
+  - Bullet1
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,6 @@ TagManager:
   - UI
   - ground
   - Player
-  - 
   - 
   - 
   - 

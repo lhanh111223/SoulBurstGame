@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
         //Instantiate(characterDB.GetCharacter(selectedOption).playerPrefab, transform.position, Quaternion.identity);
 
         Health = 100;
-        Mana = 100;
+        Mana = 200;
         _player = Instantiate(characterDB.GetCharacter(selectedOption).playerPrefab, transform.position, Quaternion.identity);
         virtualCamera.Follow = _player.transform;
 
