@@ -21,7 +21,7 @@ public class BossStateManager : MonoBehaviour
     public BossAttackState AttackState = new BossAttackState();
     public BossImmuneState ImmuneState = new BossImmuneState();
     public BossDeadState DeadState = new BossDeadState();
-
+    
      
     public HealthBossController HealthBossController;
     private string currentAnimationState = "BossIdle";
@@ -142,5 +142,11 @@ public class BossStateManager : MonoBehaviour
         {
             currentState.OnCollisionEnter(this, collision);
         }
+        if (collision.gameObject.CompareTag("Bullet1"))
+        {
+            HealthBossController.takeDamage(10);
+            collision.gameObject.SetActive(false);
+        }
     }
+    
 }

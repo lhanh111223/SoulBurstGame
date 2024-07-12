@@ -34,7 +34,6 @@ public class EnemySpawner : MonoBehaviour
             }
         }
     }
-
     void SpawnEnemies()
     {
         for (int i = 0; i < enemyInstances.Length; i++)

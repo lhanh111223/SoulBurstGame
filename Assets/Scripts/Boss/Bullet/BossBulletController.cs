@@ -9,6 +9,11 @@ public class BossBulletController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PlayerHealthBar = FindObjectOfType<PlayerHealthBar>();
+        if (PlayerHealthBar != null)
+        {
+            PlayerHealthBar = PlayerHealthBar.GetComponent<PlayerHealthBar>();
+        }
     }
 
     // Update is called once per frame
@@ -23,5 +28,6 @@ public class BossBulletController : MonoBehaviour
         {
             PlayerHealthBar.takeDamage(bulletDamage);
         }
+        
     }
 }

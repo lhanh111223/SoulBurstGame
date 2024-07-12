@@ -29,7 +29,7 @@ public class BossAttackState : BossBaseState
 
     public override void OnCollisionEnter(BossStateManager boss, Collision2D collider)
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public override void UpdateState(BossStateManager boss)
