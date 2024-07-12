@@ -21,7 +21,7 @@ public class BossBulletController : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            PlayerHealthBar.takeDamage(bulletDamage);
+            // PlayerHealthBar.takeDamage(bulletDamage);
         }
     }
 }
