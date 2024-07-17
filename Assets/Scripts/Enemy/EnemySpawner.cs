@@ -7,33 +7,26 @@ public class EnemySpawner : MonoBehaviour
     public GameObject enemyPrefab;
     public Vector2 spawnAreaMin;
     public Vector2 spawnAreaMax;
-    private GameObject[] enemyInstances = new GameObject[2];
+    private GameObject[] enemyInstances = new GameObject[3];
+    private bool eventTriggered = false; 
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.CompareTag("Player"))
+        if (collider.CompareTag("Player") && !eventTriggered)
         {
+            eventTriggered = true; 
+
             if (doorTilemap != null)
             {
                 doorTilemap.gameObject.SetActive(true);
             }
-
             if (enemyInstances[0] == null)
             {
                 SpawnEnemies();
             }
-            else
-            {
-                foreach (GameObject enemy in enemyInstances)
-                {
-                    if (enemy != null)
-                    {
-                        enemy.SetActive(true);
-                    }
-                }
-            }
         }
     }
+
     void SpawnEnemies()
     {
         for (int i = 0; i < enemyInstances.Length; i++)
@@ -50,7 +43,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        // Kiểm tra nếu tất cả các enemy đã bị tiêu diệt
+       
         bool allEnemiesDestroyed = true;
 
         foreach (GameObject enemy in enemyInstances)
