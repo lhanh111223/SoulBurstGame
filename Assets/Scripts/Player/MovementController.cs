@@ -2,39 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
+using Assets.Scripts.Parameter;
+using Unity.VisualScripting;
 
 public class MovementController : MonoBehaviour
 {
+    static GameParameterMovementController _param = new();
+
     [Header("Movement Settings")]
-    public KeyCode inputUp = KeyCode.W;
-    public KeyCode inputDown = KeyCode.S;
-    public KeyCode inputLeft = KeyCode.A;
-    public KeyCode inputRight = KeyCode.D;
+    public KeyCode inputUp = _param.INPUT_UP;
+    public KeyCode inputDown = _param.INPUT_DOWN;
+    public KeyCode inputLeft = _param.INPUT_LEFT;
+    public KeyCode inputRight = _param.INPUT_RIGHT;
+    public MouseButton inputAttack = _param.INPUT_ATTACK;
     public Transform BodyPlayer;
-    public float Speed = 5f;
+    public float Speed = _param.SPEED;
     public GameObject DashEffect;
-    public float DashDelaySeconds;
 
 
     // Dash
-    public float DashBoost;
-    public float DashTime;
-    float _dashTime;
-    bool _isDashing;
-    Coroutine dashEffectCoroutine;
+    public KeyCode inputDash = _param.INPUT_DASH;
+    public float DashDelaySeconds = _param.DELAY_DASH_SECOND;
+    public float DashBoost = _param.DASH_BOOST;
+    public float DashTime = _param.DASH_TIME;
+    public float TimeBetweenDash = _param.TIME_BETWEEN_DASH;
 
     // Internal Variables
+    float _dashTime;
+    bool _isDashing;
+    float _timeBetweenDash;
+    Coroutine dashEffectCoroutine;
+
     Animator animator;
     Rigidbody2D rb;
     float _localScaleX;
 
     // Normal Attack
-    float _timeNormalAttack = 1f;
 
     private void Start()
     {
-        // Tạm thời tắt con trỏ chuột hiển thị ở đây -> thêm vào game logic sau
-        Cursor.visible = false;
 
         this.animator = GetComponentInChildren<Animator>();
         this.rb = GetComponent<Rigidbody2D>();
@@ -47,22 +53,22 @@ public class MovementController : MonoBehaviour
         // Move
         Vector2 direction = new Vector2(0, 0);
 
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(inputUp))
         {
             direction += Vector2.up;
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(inputLeft))
         {
             direction += Vector2.left;
         }
 
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(inputDown))
         {
             direction += Vector2.down;
         }
 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(inputRight))
         {
             direction += Vector2.right;
         }
@@ -78,12 +84,12 @@ public class MovementController : MonoBehaviour
 
         // Rotate player following mouse
         RotatePlayerWithMouse();
-
         this.rb.velocity = direction.normalized * this.Speed;
         this.animator.SetBool("PlayerRun", direction.magnitude > 0f);
 
         // Dash
-        if (Input.GetKeyDown(KeyCode.Space) && !_isDashing && _dashTime <= 0)
+        _timeBetweenDash -= Time.deltaTime;
+        if (Input.GetKeyDown(inputDash) && !_isDashing && _dashTime <= 0 && _timeBetweenDash <= 0)
         {
             this.Speed += DashBoost;
             _dashTime = DashTime;
@@ -100,16 +106,24 @@ public class MovementController : MonoBehaviour
         {
             _dashTime -= Time.deltaTime;
         }
-
         // Normal Attack 
-        
+        if (Input.GetMouseButtonDown(1))
+        {
+            animator.SetBool("PlayerAttack", true);
+        }
+        else
+        {
+            animator.SetBool("PlayerAttack", false);
+        }
+
     }
 
-    
+
 
     // Dashing effect
     void StopDashEffect()
     {
+        _timeBetweenDash = TimeBetweenDash;
         if (dashEffectCoroutine != null)
         {
             StopCoroutine(dashEffectCoroutine);
@@ -156,7 +170,4 @@ public class MovementController : MonoBehaviour
             BodyPlayer.localScale = new Vector3(this._localScaleX, BodyPlayer.localScale.y, BodyPlayer.localScale.z);
         }
     }
-
-    // Normal attack
-    
 }

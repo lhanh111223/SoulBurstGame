@@ -11,7 +11,7 @@ public class WeaponPickupZone : MonoBehaviour
         Vector3 offset = new Vector3(0, -1, 0);
         foreach(var weapon in PickableWeapons)
         {
-            offset += new Vector3(0, 2, 0);
+            offset += new Vector3(0, 1.7f, 0);
             Instantiate(weapon, transform.position + offset, Quaternion.identity);
         }
     }

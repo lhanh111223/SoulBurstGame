@@ -11,6 +11,7 @@ public class GameLogic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = false;
         crosshair = Instantiate(RedDotPrefab, Vector3.zero, Quaternion.identity);
     }
 

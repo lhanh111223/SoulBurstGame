@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Assets.Scripts.Parameter;
 public class PlayerHealthBar : MonoBehaviour
 {
+    static GameParameterPlayerHealthBar _param = new();
+
     public Image fillBar;
     public TextMeshProUGUI txtHp;
-    public int maxHealth = 100;
+    public int maxHealth = _param.MAX_HEALTH;
     public int currentHealth;
     // Start is called before the first frame update
     void Start()

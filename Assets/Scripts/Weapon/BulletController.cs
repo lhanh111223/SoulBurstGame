@@ -1,13 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Scripts.Parameter;
 
 public class BulletController : MonoBehaviour
 {
+    static GameParameterBulletController _param = new();
+
     public enum BulletType
     {
         Bullet,
-        Lazer
+        Lazer,
+        Bullet3Aka,
+        Bullet4Shotgun
     }
 
     public BulletType bulletType;
@@ -46,7 +51,7 @@ public class BulletController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
+
 
         if (bulletType == BulletType.Lazer)
         {
@@ -56,16 +61,17 @@ public class BulletController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (bulletType == BulletType.Bullet)
+        if (bulletType != BulletType.Lazer)
         {
             // Enemy
             if (collision.gameObject.tag == "Enemy")
             {
                 // Take Damage to enemy
+
                 Destroy(gameObject);
             }
             // Wall
-            if (collision.gameObject.tag == "Wall")
+            if (collision.gameObject.tag == "Wall" && bulletType != BulletType.Bullet3Aka)
             {
                 rb.AddForce(-transform.right * wc.BulletForce, ForceMode2D.Impulse);
                 collisionWallCounter++;
@@ -74,7 +80,10 @@ public class BulletController : MonoBehaviour
                     Destroy(gameObject);
                     collisionWallCounter = 0;
                 }
-
+            }
+            else if ((collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Bullet1") && bulletType == BulletType.Bullet3Aka)
+            {
+                Destroy(gameObject);
             }
             // Player
             if (collision.gameObject.tag == "Player")
@@ -117,5 +126,5 @@ public class BulletController : MonoBehaviour
             }
         }
     }
-    
+
 }

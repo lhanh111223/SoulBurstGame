@@ -2,13 +2,16 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Assets.Scripts.Parameter;
 
 public class PlayerManaBar : MonoBehaviour
 {
+    static GameParameterPlayerManaBar _param = new();   
+
     public Image fillBar;
     public TextMeshProUGUI txtMana;
     private float fillAmount;
-    public int maxMana = 200;
+    public int maxMana = _param.MAX_MANA;
     private Player player;
     private bool canClick = true;
 

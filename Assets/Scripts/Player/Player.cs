@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Assets.Scripts.Parameter;
 
 public class Player : MonoBehaviour
 {
+    static GameParameterPlayer _param = new();
+
     public CharacterDatabase characterDB;
     public SpriteRenderer artworkSprite;
     private int selectedOption = 0;
@@ -13,6 +16,7 @@ public class Player : MonoBehaviour
     // Mana - HP
     public int Health;
     public int Mana;
+
     public CinemachineVirtualCamera virtualCamera;
 
     GameObject _player;
@@ -29,9 +33,8 @@ public class Player : MonoBehaviour
             Load();
         }
         //Instantiate(characterDB.GetCharacter(selectedOption).playerPrefab, transform.position, Quaternion.identity);
-
-        Health = 100;
-        Mana = 200;
+        Health = _param.MAX_HEALTH;
+        Mana = _param.MAX_MANA;
         _player = Instantiate(characterDB.GetCharacter(selectedOption).playerPrefab, transform.position, Quaternion.identity);
         virtualCamera.Follow = _player.transform;
 
