@@ -33,6 +33,9 @@ public class MovementController : MonoBehaviour
     float _timeBetweenDash;
     Coroutine dashEffectCoroutine;
 
+    // Player Invincible
+    bool _isInvincible;
+
     Animator animator;
     Rigidbody2D rb;
     float _localScaleX;
@@ -41,7 +44,7 @@ public class MovementController : MonoBehaviour
 
     private void Start()
     {
-
+        this._isInvincible = false;
         this.animator = GetComponentInChildren<Animator>();
         this.rb = GetComponent<Rigidbody2D>();
         this._localScaleX = BodyPlayer.localScale.x;
@@ -116,9 +119,17 @@ public class MovementController : MonoBehaviour
             animator.SetBool("PlayerAttack", false);
         }
 
+        // Invincible Effect
+        //if (_isInvincible)
+        //{
+        //    animator.SetBool("PlayerInvincible", true);
+        //}
+        //else
+        //{
+        //    animator.SetBool("PlayerInvincible", false);
+        //}
+
     }
-
-
 
     // Dashing effect
     void StopDashEffect()
@@ -170,4 +181,15 @@ public class MovementController : MonoBehaviour
             BodyPlayer.localScale = new Vector3(this._localScaleX, BodyPlayer.localScale.y, BodyPlayer.localScale.z);
         }
     }
+
+    // Invincible
+    public void SetInvincible(bool isInvincible)
+    {
+        _isInvincible = isInvincible;
+    }
+    public bool GetInvincible()
+    {
+        return _isInvincible;
+    }
+    
 }

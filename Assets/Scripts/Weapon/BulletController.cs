@@ -39,7 +39,6 @@ public class BulletController : MonoBehaviour
         {
             lineRenderer = GetComponent<LineRenderer>();
             edgeCollider = GetComponent<EdgeCollider2D>();
-            UpdateCollider();
         }
         weaponBreakController = FindObjectOfType<WeaponBreakUnknownController>();
     }
@@ -51,12 +50,6 @@ public class BulletController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-
-        if (bulletType == BulletType.Lazer)
-        {
-            UpdateCollider();
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -67,7 +60,6 @@ public class BulletController : MonoBehaviour
             if (collision.gameObject.tag == "Enemy")
             {
                 // Take Damage to enemy
-
                 Destroy(gameObject);
             }
             // Wall
@@ -99,30 +91,16 @@ public class BulletController : MonoBehaviour
             }
         }
     }
-
-    void UpdateCollider()
-    {
-        if (lineRenderer == null || edgeCollider == null) return;
-        gameObject.transform.position = wc.getLazer().transform.position;
-        Vector3[] positions = new Vector3[lineRenderer.positionCount];
-        lineRenderer.GetPositions(positions);
-        Vector2[] colliderPoints = new Vector2[positions.Length];
-        for (int i = 0; i < positions.Length; i++)
-        {
-            colliderPoints[i] = new Vector2(positions[i].x, positions[i].y);
-        }
-
-        edgeCollider.points = colliderPoints;
-    }
-
+    int count = 0;
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if (bulletType == BulletType.Lazer)
         {
             if (collision.gameObject.tag == "Enemy")
             {
                 // Take Damage to enemy
-                Debug.Log("Hit Enemy");
+                Debug.Log("Lazer hit enemy " + ++count);
             }
         }
     }

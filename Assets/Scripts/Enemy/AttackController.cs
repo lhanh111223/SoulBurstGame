@@ -6,7 +6,6 @@ public class AttackController : MonoBehaviour
     public int attackDamage = 10;
     private int bulletCount = 3;
     private PlayerHealthBar playerHealthBar;
-
     void Start()
     {
         playerHealthBar = FindObjectOfType<PlayerHealthBar>();

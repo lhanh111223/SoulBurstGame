@@ -19,9 +19,17 @@ public class SkillController : MonoBehaviour
     Player player;
     bool _skillActive = false;
 
+    // Animation
+    Animator animator;
+    int skillLayerEnter;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        this.animator = GetComponentInChildren<Animator>();
+        this.skillLayerEnter = this.animator.GetLayerIndex("SkillLayer");
+
         _skillDuration = SkillDuration;
         _timeBetweenSkill = TimeBetweenSkill;
         player = FindAnyObjectByType<Player>();
@@ -31,16 +39,26 @@ public class SkillController : MonoBehaviour
     void Update()
     {
         _timeBetweenSkill -= Time.deltaTime;
+
         if (Input.GetKeyDown(inputSkill) && _skillDuration > 0 && !_skillActive && _timeBetweenSkill <= 0)
         {
-            _skillActive = true;
-            Target = player.GetPlayer();
-            if (Target != null)
+            if (Skill != null)
             {
-                _skill = Instantiate(Skill, Target.transform.position, Quaternion.identity);
+                _skillActive = true;
+                Target = player.GetPlayer();
+                if (Target != null)
+                {
+                    _skill = Instantiate(Skill, Target.transform.position, Quaternion.identity);
+                }
+
+            }
+            else
+            {
+                // Set invincible for player
+                StartCoroutine(SkillInvincible());
             }
         }
-
+        // Skill for player ninja follow
         if (_skill != null)
         {
             // Follow Target
@@ -54,5 +72,16 @@ public class SkillController : MonoBehaviour
                 _skillActive = false;
             }
         }
+    }
+
+    private IEnumerator SkillInvincible()
+    {
+        gameObject.GetComponent<MovementController>().SetInvincible(true);
+        animator.SetLayerWeight(skillLayerEnter, 1);
+        yield return new WaitForSeconds(SkillDuration);
+
+        gameObject.GetComponent<MovementController>().SetInvincible(false);
+        animator.SetLayerWeight(skillLayerEnter, 0);
+        _timeBetweenSkill = TimeBetweenSkill;
     }
 }

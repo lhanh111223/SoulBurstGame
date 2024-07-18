@@ -12,7 +12,6 @@ public class WeaponController : MonoBehaviour
     public Transform FirePoint;
     public float TimeBetweenFire;
     public float BulletForce;
-    public int LazerLength;
 
     [Header("Lazer")]
     public float LazerLongTime;
@@ -23,7 +22,7 @@ public class WeaponController : MonoBehaviour
     float _timeBetweenFire;
     float localScaleY_Weapon;
     GameObject lazer;
-    string _bulletType;
+    string _bulletType; 
     string _weaponType;
 
     // Lazer Timer
@@ -71,7 +70,7 @@ public class WeaponController : MonoBehaviour
                     lazer.SetActive(true);
                     lazer.GetComponent<LineRenderer>().enabled = true;
                     lineRenderer = lazer.GetComponent<LineRenderer>();
-                    FireWithLazerLength();
+                    FireLazer();
                 }
                 else
                     lazer.SetActive(false);
@@ -84,7 +83,6 @@ public class WeaponController : MonoBehaviour
         }
         else
             lazer.SetActive(false);
-
     }
 
     // Rotate weapon
@@ -152,7 +150,7 @@ public class WeaponController : MonoBehaviour
 
 
     //Lazer
-    void FireWithLazerLength()
+    void FireLazer()
     {
         if (player.Mana <= 0) return;
 
@@ -165,7 +163,6 @@ public class WeaponController : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast(FirePoint.position, FirePoint.right);
         lineRenderer.SetPosition(0, FirePoint.position);
-
         if (Input.GetMouseButton(0))
         {
             lineRenderer.enabled = true;
@@ -183,6 +180,29 @@ public class WeaponController : MonoBehaviour
         {
             lineRenderer.SetPosition(1, FirePoint.position + FirePoint.right * 100);
         }
+        UpdateCollider();
+    }
+
+    void UpdateCollider()
+    {
+        // Lấy số lượng điểm từ Line Renderer
+        int pointCount = lineRenderer.positionCount;
+
+        // Tạo một mảng các điểm Vector2
+        Vector2[] points = new Vector2[pointCount];
+
+        // Chuyển đổi các điểm từ Vector3 sang Vector2 và offset bởi FirePoint
+        for (int i = 0; i < pointCount; i++)
+        {
+            Vector3 lineRendererPos = lineRenderer.GetPosition(i);
+            points[i] = new Vector2(lineRendererPos.x - FirePoint.position.x, lineRendererPos.y - FirePoint.position.y);
+        }
+
+        // Cập nhật các điểm cho Edge Collider 2D
+        edgeCollider.points = points;
+
+        // Cập nhật vị trí của collider để khớp với FirePoint
+        edgeCollider.transform.position = FirePoint.position;
     }
 
 }

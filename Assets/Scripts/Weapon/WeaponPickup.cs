@@ -20,7 +20,6 @@ public class WeaponPickup : MonoBehaviour
     GameObject player;
     void OnWeaponPickup(GameObject player)
     {
-        string s = _param.WEAPON_TYPE_SHOTGUN;
         switch (weaponType)
         {
             case WeaponType.Weapon1:

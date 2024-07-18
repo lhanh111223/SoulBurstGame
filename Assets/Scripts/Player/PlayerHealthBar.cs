@@ -12,14 +12,18 @@ public class PlayerHealthBar : MonoBehaviour
     public TextMeshProUGUI txtHp;
     public int maxHealth = _param.MAX_HEALTH;
     public int currentHealth;
+
+    private MovementController player;
+
     // Start is called before the first frame update
     void Start()
     {
+        player = FindAnyObjectByType<MovementController>();
         currentHealth = maxHealth;
         setHealth(currentHealth, maxHealth);
     }
 
-    
+
     public void setHealth(int currentHealth, int maxHealth)
     {
         fillBar.fillAmount = (float)currentHealth / (float)maxHealth;
@@ -28,7 +32,10 @@ public class PlayerHealthBar : MonoBehaviour
 
 
     public void takeDamage(int damage)
-    {  
+    {
+        if (player.GetInvincible())
+            return;
+
         currentHealth -= damage;
         fillBar.fillAmount = (float)currentHealth / (float)maxHealth;
         txtHp.text = currentHealth.ToString() + " / " + maxHealth.ToString();
@@ -37,7 +44,7 @@ public class PlayerHealthBar : MonoBehaviour
     //{
     //    if(currentHealth<0)
     //    {
-            
+
     //    }
     //}
 }

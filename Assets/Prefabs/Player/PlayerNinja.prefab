@@ -237,9 +237,11 @@ MonoBehaviour:
   BodyPlayer: {fileID: 6573858611512093487}
   Speed: 5
   DashEffect: {fileID: 1708783206148499535, guid: 1a55c9cef59feb6498a1a15e990622a0, type: 3}
+  inputDash: 32
   DashDelaySeconds: 0.09
   DashBoost: 5
   DashTime: 0.3
+  TimeBetweenDash: 5
 --- !u!114 &8312289674149212069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,6 +275,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   inputSkill: 304
   SkillDuration: 5
+  TimeBetweenSkill: 2
 --- !u!114 &8039983676365723562
 MonoBehaviour:
   m_ObjectHideFlags: 0
