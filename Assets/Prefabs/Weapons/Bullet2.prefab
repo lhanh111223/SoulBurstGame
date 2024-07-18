@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2891141681236456652}
   m_Layer: 0
   m_Name: Bullet2
-  m_TagString: Untagged
+  m_TagString: Bullet1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 021382ccb4d6a454a88947627956559f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemyHealth: {fileID: 0}
   bulletType: 1
   weaponBreakController: {fileID: 0}
 --- !u!120 &-4756732724448010273
@@ -234,7 +235,7 @@ EdgeCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

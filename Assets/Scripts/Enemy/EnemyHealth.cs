@@ -22,10 +22,8 @@ public class EnemyHealth : MonoBehaviour
             Die();
         }
     }
-
     void Die()
     {
-
         int coinAmount = Random.Range(1, 11);
 
         if (playerCoinBar != null)

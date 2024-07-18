@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class WeaponBreakUnknownController : MonoBehaviour
 {
     public BreakUnknownController breakUnknownPrefabs;
-    private Tilemap breakUnknownTiles;
+    public Tilemap breakUnknownTiles;
 
     void Start()
     {
@@ -16,12 +16,6 @@ public class WeaponBreakUnknownController : MonoBehaviour
             breakUnknownTiles = tilemapObject.GetComponent<Tilemap>();
         }
     }
-
-    void Update()
-    {
-        
-    }
-
     public void BreakUnknown(Vector2 position)
     {
         if (breakUnknownTiles == null)

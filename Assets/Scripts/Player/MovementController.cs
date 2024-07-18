@@ -194,5 +194,9 @@ public class MovementController : MonoBehaviour
     {
         return _isInvincible;
     }
-    
+    public void PlayerDie()
+    {
+        this.animator.SetBool("PlayerDie", true);
+        Destroy(gameObject, 1f);
+    }
 }

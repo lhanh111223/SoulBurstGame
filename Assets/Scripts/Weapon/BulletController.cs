@@ -6,7 +6,6 @@ using Assets.Scripts.Parameter;
 public class BulletController : MonoBehaviour
 {
     static GameParameterBulletController _param = new();
-
     public enum BulletType
     {
         Bullet,
@@ -26,7 +25,7 @@ public class BulletController : MonoBehaviour
     // Line Renderer
     LineRenderer lineRenderer;
     EdgeCollider2D edgeCollider;
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +40,7 @@ public class BulletController : MonoBehaviour
             edgeCollider = GetComponent<EdgeCollider2D>();
         }
         weaponBreakController = FindObjectOfType<WeaponBreakUnknownController>();
+        
     }
 
     // Update is called once per frame
@@ -89,20 +89,9 @@ public class BulletController : MonoBehaviour
                 weaponBreakController.BreakUnknown(collisionPoint);
                 Destroy(gameObject);
             }
+            
         }
     }
-    int count = 0;
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        
-        if (bulletType == BulletType.Lazer)
-        {
-            if (collision.gameObject.tag == "Enemy")
-            {
-                // Take Damage to enemy
-                Debug.Log("Lazer hit enemy " + ++count);
-            }
-        }
-    }
+    
 
 }
