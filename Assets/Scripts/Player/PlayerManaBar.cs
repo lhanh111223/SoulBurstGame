@@ -36,9 +36,20 @@ public class PlayerManaBar : MonoBehaviour
         //} 
     }
     public void SetMana(int currentMana, int maxMana)
-        {
-            fillBar.fillAmount = (float)currentMana / (float)maxMana;
-            txtMana.text = currentMana.ToString() + " / " + maxMana.ToString();
-        }
+    {
+        fillBar.fillAmount = (float)currentMana / (float)maxMana;
+        txtMana.text = currentMana.ToString() + " / " + maxMana.ToString();
     }
+
+    public void IncreaseMana(int amount)
+    {
+        player.Mana += amount;
+        if (player.Mana > maxMana)
+        {
+            player.Mana = maxMana;
+        }
+        SetMana(player.Mana, maxMana);
+    }
+}
+
 

@@ -150,7 +150,13 @@ MonoBehaviour:
   - {fileID: -1370650555, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
   - {fileID: 1328202015, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
   - {fileID: 1664402235, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
-  - {fileID: 0}
+  - {fileID: 1328202015, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
+  - {fileID: -1370650555, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
+  - {fileID: -558207286, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
+  - {fileID: 1798679082, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
+  - {fileID: -194424576, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
+  - {fileID: -881354982, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
+  - {fileID: 183610919, guid: 419219b4ff70f04428c3d8dcfc0eb21a, type: 3}
   animationTime: 0.125
   loop: 0
   idle: 0

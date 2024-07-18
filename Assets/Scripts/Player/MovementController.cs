@@ -31,6 +31,9 @@ public class MovementController : MonoBehaviour
     // Normal Attack
     float _timeNormalAttack = 1f;
 
+    // Store interaction
+    private StoreController currentStore;
+
     private void Start()
     {
         // Tạm thời tắt con trỏ chuột hiển thị ở đây -> thêm vào game logic sau
@@ -102,7 +105,10 @@ public class MovementController : MonoBehaviour
         }
 
         // Normal Attack 
-        
+        if (Input.GetKeyDown(KeyCode.E) && currentStore != null)
+        {
+            currentStore.TryPurchaseItem();
+        }
     }
 
     
@@ -158,5 +164,19 @@ public class MovementController : MonoBehaviour
     }
 
     // Normal attack
-    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Store"))
+        {
+            currentStore = other.GetComponent<StoreController>();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Store"))
+        {
+            currentStore = null;
+        }
+    }
 }

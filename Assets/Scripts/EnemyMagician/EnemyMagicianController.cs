@@ -12,29 +12,41 @@ public class EnemyMagicianController : MonoBehaviour
     public float attackCooldown = 1f;
     public float distanceBehindPlayer = 1f;
     private Transform player;
-    public float nextattackTime = 0f;
 
     [SerializeField]
-    private float moveSpeed = 2f;
-    public float moveDuration = 5f;
-    private bool hasMoved = false;
-    private Facetoplayer faceToPlayer;
+    public float moveSpeed = 2f;
+    public float moveDuration = 3f;
+    public float attackDistance = 1.5f;
+
+    private bool hasAttacked = false;
+    private bool isPerformingSkill = false;
 
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
-        faceToPlayer = GetComponent<Facetoplayer>();
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
         {
             player = playerObject.transform;
         }
-        StartCoroutine(MoveAndPerformAction());
+        StartCoroutine(ActionRoutine());
+    }
+
+    private IEnumerator ActionRoutine()
+    {
+        while (true)
+        {
+            yield return StartCoroutine(MoveAndAttackPlayer());
+            yield return new WaitForSeconds(3f);
+            yield return StartCoroutine(PerformAttackSequence());
+        }
     }
 
     public IEnumerator PerformAttackSequence()
     {
+        isPerformingSkill = true;
+
         yield return new WaitForSeconds(0.5f);
         _anim.SetBool("isSkill", true);
 
@@ -42,8 +54,13 @@ public class EnemyMagicianController : MonoBehaviour
         _anim.SetBool("isSkill", false);
 
         _anim.SetBool("isTele", true);
-
         _anim.SetBool("isAppear", true);
+
+        yield return new WaitForSeconds(4f);
+        _anim.SetBool("isTele", false);
+        _anim.SetBool("isAppear", false);
+
+        isPerformingSkill = false;
     }
 
     void TeleportBehindPlayer()
@@ -68,10 +85,10 @@ public class EnemyMagicianController : MonoBehaviour
         }
     }
 
-    IEnumerator MoveAndPerformAction()
+    IEnumerator MoveAndAttackPlayer()
     {
         float startTime = Time.time;
-        while (Time.time - startTime < moveDuration)
+        while (Time.time - startTime < moveDuration && !isPerformingSkill)
         {
             if (player != null)
             {
@@ -81,17 +98,39 @@ public class EnemyMagicianController : MonoBehaviour
             yield return null;
         }
 
-        hasMoved = true;
         _anim.SetBool("isWalk", false);
-        StartCoroutine(PerformAttackSequence());
     }
 
     void MoveTowardsPlayer()
     {
-        _anim.SetBool("isWalk", true);
         Vector2 direction = ((Vector2)player.position - (Vector2)transform.position).normalized;
-        Vector2 newPosition = (Vector2)transform.position + direction * moveSpeed * Time.deltaTime;
-        _rb.MovePosition(newPosition);
+        float distanceToPlayer = Vector2.Distance(player.position, transform.position);
+
+        if (distanceToPlayer > attackDistance)
+        {
+            _anim.SetBool("isWalk", true);
+            Vector2 newPosition = (Vector2)transform.position + direction * moveSpeed * Time.deltaTime;
+            _rb.MovePosition(newPosition);
+            _anim.SetBool("isAttack", false);
+            hasAttacked = false;
+        }
+        else
+        {
+            _anim.SetBool("isWalk", false);
+            if (!hasAttacked && !isPerformingSkill)
+            {
+                _anim.SetBool("isAttack", true);
+                hasAttacked = true; 
+                StartCoroutine(AttackCooldown());
+            }
+        }
+    }
+
+    private IEnumerator AttackCooldown()
+    {
+        yield return new WaitForSeconds(attackCooldown);
+        _anim.SetBool("isAttack", false);
+        hasAttacked = false;
     }
 
     void UpdateLocalScale()

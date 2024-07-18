@@ -4,11 +4,22 @@ using UnityEngine;
 
 public class LightningController : MonoBehaviour
 {
-    void OnTriggerEnter2D(Collider2D collider)
+    PlayerHealthBar playerHealthBar;
+    private void Start()
     {
-        if (collider.CompareTag("Player"))
+        playerHealthBar = GetComponent<PlayerHealthBar>();
+        playerHealthBar = FindObjectOfType<PlayerHealthBar>();
+        if (playerHealthBar != null)
         {
-            Debug.Log("Da trung player");
+            playerHealthBar = playerHealthBar.GetComponent<PlayerHealthBar>();
         }
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerHealthBar.takeDamage(10);
+        }
+    }
+    
 }
