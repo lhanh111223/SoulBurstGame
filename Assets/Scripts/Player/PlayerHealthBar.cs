@@ -40,11 +40,15 @@ public class PlayerHealthBar : MonoBehaviour
         fillBar.fillAmount = (float)currentHealth / (float)maxHealth;
         txtHp.text = currentHealth.ToString() + " / " + maxHealth.ToString();
     }
-    //void Death()
-    //{
-    //    if(currentHealth<0)
-    //    {
+    public void IncreaseHealth(int amount)
+    {
+        currentHealth += amount;
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        setHealth(currentHealth, maxHealth);
+    }
 
-    //    }
-    //}
+
 }
