@@ -1,17 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Assets.Scripts.Parameter;
 
 public class BulletController : MonoBehaviour
 {
-    static GameParameterBulletController _param = new();
     public enum BulletType
     {
         Bullet,
-        Lazer,
-        Bullet3Aka,
-        Bullet4Shotgun
+        Lazer
     }
 
     public BulletType bulletType;
@@ -25,7 +21,7 @@ public class BulletController : MonoBehaviour
     // Line Renderer
     LineRenderer lineRenderer;
     EdgeCollider2D edgeCollider;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,9 +34,9 @@ public class BulletController : MonoBehaviour
         {
             lineRenderer = GetComponent<LineRenderer>();
             edgeCollider = GetComponent<EdgeCollider2D>();
+            UpdateCollider();
         }
         weaponBreakController = FindObjectOfType<WeaponBreakUnknownController>();
-        
     }
 
     // Update is called once per frame
@@ -50,11 +46,17 @@ public class BulletController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
+
+        if (bulletType == BulletType.Lazer)
+        {
+            UpdateCollider();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (bulletType != BulletType.Lazer)
+        if (bulletType == BulletType.Bullet)
         {
             // Enemy
             if (collision.gameObject.tag == "Enemy")
@@ -63,7 +65,7 @@ public class BulletController : MonoBehaviour
                 Destroy(gameObject);
             }
             // Wall
-            if (collision.gameObject.tag == "Wall" && bulletType != BulletType.Bullet3Aka)
+            if (collision.gameObject.tag == "Wall")
             {
                 rb.AddForce(-transform.right * wc.BulletForce, ForceMode2D.Impulse);
                 collisionWallCounter++;
@@ -72,10 +74,7 @@ public class BulletController : MonoBehaviour
                     Destroy(gameObject);
                     collisionWallCounter = 0;
                 }
-            }
-            else if ((collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Bullet1") && bulletType == BulletType.Bullet3Aka)
-            {
-                Destroy(gameObject);
+
             }
             // Player
             if (collision.gameObject.tag == "Player")
@@ -89,9 +88,34 @@ public class BulletController : MonoBehaviour
                 weaponBreakController.BreakUnknown(collisionPoint);
                 Destroy(gameObject);
             }
-            
+        }
+    }
+
+    void UpdateCollider()
+    {
+        if (lineRenderer == null || edgeCollider == null) return;
+        gameObject.transform.position = wc.getLazer().transform.position;
+        Vector3[] positions = new Vector3[lineRenderer.positionCount];
+        lineRenderer.GetPositions(positions);
+        Vector2[] colliderPoints = new Vector2[positions.Length];
+        for (int i = 0; i < positions.Length; i++)
+        {
+            colliderPoints[i] = new Vector2(positions[i].x, positions[i].y);
+        }
+
+        edgeCollider.points = colliderPoints;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (bulletType == BulletType.Lazer)
+        {
+            if (collision.gameObject.tag == "Enemy")
+            {
+                // Take Damage to enemy
+                Debug.Log("Hit Enemy");
+            }
         }
     }
     
-
 }

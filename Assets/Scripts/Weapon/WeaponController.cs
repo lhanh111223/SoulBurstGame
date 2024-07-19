@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using static BulletController;
-using Assets.Scripts.Parameter;
+
 public class WeaponController : MonoBehaviour
 {
-    static GameParameterWeaponController _param = new();
-
     [Header("Attack")]
     public GameObject Bullet;
     public Transform FirePoint;
     public float TimeBetweenFire;
     public float BulletForce;
+    public int LazerLength;
 
     [Header("Lazer")]
     public float LazerLongTime;
@@ -21,15 +20,14 @@ public class WeaponController : MonoBehaviour
     // Time and Type
     float _timeBetweenFire;
     float localScaleY_Weapon;
+    string _bulletType;
     GameObject lazer;
-    string _bulletType; 
-    string _weaponType;
 
     // Lazer Timer
     float _lazerLongTime;
     // Player HP - Mana
     Player player;
-    float angleOffset = 15f;
+
 
 
     // Start is called before the first frame update
@@ -38,17 +36,16 @@ public class WeaponController : MonoBehaviour
 
         localScaleY_Weapon = transform.localScale.y;
         _bulletType = Bullet.GetComponent<BulletController>().bulletType.ToString();
-
         lazer = Instantiate(Bullet, FirePoint.position, Quaternion.identity);
         lazer.SetActive(false);
-        if (_bulletType == _param.BULLET_TYPE_WEAPON2_LAZER)
+        if (_bulletType == "Lazer")
         {
             lineRenderer = lazer.GetComponent<LineRenderer>();
             edgeCollider = lazer.GetComponent<EdgeCollider2D>();
             _lazerLongTime = LazerLongTime;
         }
         player = FindAnyObjectByType<Player>();
-
+        
     }
 
     public GameObject getLazer()
@@ -63,26 +60,34 @@ public class WeaponController : MonoBehaviour
         _timeBetweenFire -= Time.deltaTime;
         if (Input.GetMouseButton(0) && _timeBetweenFire < 0)
         {
-            if (_bulletType == _param.BULLET_TYPE_WEAPON2_LAZER)
+            if (_bulletType == "Lazer")
             {
-                if (player.Mana > 0)
+                if(player.Mana > 0)
                 {
                     lazer.SetActive(true);
                     lazer.GetComponent<LineRenderer>().enabled = true;
                     lineRenderer = lazer.GetComponent<LineRenderer>();
-                    FireLazer();
+                    FireWithLazerLength();
                 }
                 else
+                {
                     lazer.SetActive(false);
+                }
             }
             else 
             {
                 if (player.Mana > 0)
+                {
                     FireBullet();
+                }
             }
+
         }
         else
+        {
             lazer.SetActive(false);
+        }
+
     }
 
     // Rotate weapon
@@ -106,71 +111,25 @@ public class WeaponController : MonoBehaviour
     // Fire bullet|lazer
     void FireBullet()
     {
+        player.DecreaseMana(10);
+
         _timeBetweenFire = TimeBetweenFire;
-        if (_bulletType == _param.BULLET_TYPE_WEAPON3_AKA)
-        {
-            Vector3 firePointPosition1 = FirePoint.position + FirePoint.right * 1 / 2;
-            Vector3 firePointPosition2 = FirePoint.position;
-            if (player.Mana < 10)
-            {
-                return;
-            }
-            player.DecreaseMana(10);
-            GameObject bulletTmp1 = Instantiate(Bullet, firePointPosition1, Quaternion.identity);
-            Rigidbody2D rb1 = bulletTmp1.GetComponent<Rigidbody2D>();
-            bulletTmp1.transform.rotation = transform.rotation;
-            rb1.AddForce(transform.right * BulletForce, ForceMode2D.Impulse);
-            GameObject bulletTmp2 = Instantiate(Bullet, firePointPosition2, Quaternion.identity);
-            Rigidbody2D rb2 = bulletTmp2.GetComponent<Rigidbody2D>();
-            bulletTmp1.transform.rotation = transform.rotation;
-            rb2.AddForce(transform.right * BulletForce, ForceMode2D.Impulse);
-        }
-        else if (_bulletType == _param.BULLET_TYPE_WEAPON4_SHOTGUN)
-        {
-            if (player.Mana < 10)
-            {
-                return;
-            }
-            player.DecreaseMana(10);
-            // Tạo viên đạn ở giữa
-
-            GameObject bulletCenter = Instantiate(Bullet, FirePoint.position, FirePoint.rotation);
-            Rigidbody2D rbCenter = bulletCenter.GetComponent<Rigidbody2D>();
-            rbCenter.velocity = FirePoint.right * BulletForce;
-
-            // Tạo viên đạn bên trái
-            GameObject bulletLeft = Instantiate(Bullet, FirePoint.position, FirePoint.rotation);
-            Rigidbody2D rbLeft = bulletLeft.GetComponent<Rigidbody2D>();
-            rbLeft.velocity = Quaternion.Euler(0, 0, angleOffset) * FirePoint.right * BulletForce;
-
-            // Tạo viên đạn bên phải
-            GameObject bulletRight = Instantiate(Bullet, FirePoint.position, FirePoint.rotation);
-            Rigidbody2D rbRight = bulletRight.GetComponent<Rigidbody2D>();
-            rbRight.velocity = Quaternion.Euler(0, 0, -angleOffset) * FirePoint.right * BulletForce;
-        }
-        else
-        {
-            if (player.Mana < 10)
-            {
-                return;
-            }
-            player.DecreaseMana(10);
-            GameObject bulletCenter = Instantiate(Bullet, FirePoint.position, FirePoint.rotation);
-            Rigidbody2D rbCenter = bulletCenter.GetComponent<Rigidbody2D>();
-            rbCenter.velocity = FirePoint.right * BulletForce;
-        }
+        GameObject bulletTmp = Instantiate(Bullet, FirePoint.position, Quaternion.identity);
+        Rigidbody2D rb = bulletTmp.GetComponent<Rigidbody2D>();
+        bulletTmp.transform.rotation = transform.rotation;
+        rb.AddForce(transform.right * BulletForce, ForceMode2D.Impulse);
 
     }
 
 
 
     //Lazer
-    void FireLazer()
+    void FireWithLazerLength()
     {
         if (player.Mana <= 0) return;
 
         _lazerLongTime -= Time.deltaTime;
-        if (_lazerLongTime < 0)
+        if(_lazerLongTime < 0)
         {
             player.DecreaseMana(1);
             _lazerLongTime = LazerLongTime;
@@ -178,6 +137,7 @@ public class WeaponController : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast(FirePoint.position, FirePoint.right);
         lineRenderer.SetPosition(0, FirePoint.position);
+
         if (Input.GetMouseButton(0))
         {
             lineRenderer.enabled = true;
@@ -198,26 +158,27 @@ public class WeaponController : MonoBehaviour
         UpdateCollider();
     }
 
+
+
     void UpdateCollider()
     {
-        // Lấy số lượng điểm từ Line Renderer
-        int pointCount = lineRenderer.positionCount;
-
-        // Tạo một mảng các điểm Vector2
-        Vector2[] points = new Vector2[pointCount];
-
-        // Chuyển đổi các điểm từ Vector3 sang Vector2 và offset bởi FirePoint
-        for (int i = 0; i < pointCount; i++)
+        if (lineRenderer.enabled)
         {
-            Vector3 lineRendererPos = lineRenderer.GetPosition(i);
-            points[i] = new Vector2(lineRendererPos.x - FirePoint.position.x, lineRendererPos.y - FirePoint.position.y);
+            Vector3[] positions = new Vector3[lineRenderer.positionCount];
+            lineRenderer.GetPositions(positions);
+
+            Vector2[] colliderPoints = new Vector2[positions.Length];
+            for (int i = 0; i < positions.Length; i++)
+            {
+                colliderPoints[i] = new Vector2(positions[i].x, positions[i].y);
+            }
+
+            edgeCollider.points = colliderPoints;
         }
-
-        // Cập nhật các điểm cho Edge Collider 2D
-        edgeCollider.points = points;
-
-        // Cập nhật vị trí của collider để khớp với FirePoint
-        edgeCollider.transform.position = FirePoint.position;
+        else
+        {
+            edgeCollider.points = new Vector2[0]; // Clear the collider points if the laser is not active
+        }
     }
 
 }

@@ -47,13 +47,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   breakUnknownTime: 1
-  itemSpawnChance: 0.7
-  spawnableItem:
-  - {fileID: 6040717257979043168, guid: e6917e19b1973994bb6737e25b731882, type: 3}
-  - {fileID: 364222853122516012, guid: 5c076d6ae3adc0748ac15aaa230fc774, type: 3}
+  itemSpawnChance: 1
+  spawnaleItem:
   - {fileID: 2226484882216524183, guid: f315317817185cf4bac4f1a7aeb45822, type: 3}
   - {fileID: 7847041296357676247, guid: 1dc90339740f8a64f8ac1d3cad674741, type: 3}
   - {fileID: 7897761062954602423, guid: e5c23748f271dd94aaba0291d25bd570, type: 3}
+  - {fileID: 6040717257979043168, guid: e6917e19b1973994bb6737e25b731882, type: 3}
+  - {fileID: 364222853122516012, guid: 5c076d6ae3adc0748ac15aaa230fc774, type: 3}
 --- !u!212 &5854346411904578941
 SpriteRenderer:
   m_ObjectHideFlags: 0

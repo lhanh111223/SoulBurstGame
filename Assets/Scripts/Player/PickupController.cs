@@ -20,13 +20,10 @@ public class PickupController : MonoBehaviour
 
     public void OnPickupWeapon(int weapon)
     {
-        // Delete current Weapon
         if (GetComponentInChildren<WeaponController>() != null)
         {
             Destroy(GetComponentInChildren<WeaponController>().gameObject);
         }
-
-        // Set up offset 
         if (gameObject.name.Contains("PlayerKnight"))
         {
             offsetWeapon2Body = new Vector3(0, -0.6f, 0);

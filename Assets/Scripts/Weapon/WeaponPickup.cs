@@ -1,18 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Assets.Scripts.Parameter;
 
 public class WeaponPickup : MonoBehaviour
 {
-    static GameParameterWeaponPickup _param = new();
-
     public enum WeaponType
     {
-        Weapon1, // Normal gun
-        Weapon2, // Lazer gun
-        Weapon3, // Aka gun
-        Weapon4 // shotgun 3 bullets
+        Weapon1,
+        Weapon2
     }
 
     public WeaponType weaponType;
@@ -27,12 +22,6 @@ public class WeaponPickup : MonoBehaviour
                 break;
             case WeaponType.Weapon2:
                 player.GetComponent<PickupController>().OnPickupWeapon(2);
-                break;
-            case WeaponType.Weapon3:
-                player.GetComponent<PickupController>().OnPickupWeapon(3);
-                break;
-            case WeaponType.Weapon4:
-                player.GetComponent<PickupController>().OnPickupWeapon(4);
                 break;
         }
     }

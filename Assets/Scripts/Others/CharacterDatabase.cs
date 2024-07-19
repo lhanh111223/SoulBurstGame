@@ -7,6 +7,7 @@ public class CharacterDatabase : ScriptableObject
 {
     public Character[] character;
 
+
     public int CharacterCount
     {
         get
@@ -19,6 +20,4 @@ public class CharacterDatabase : ScriptableObject
     {
         return character[index];
     }
-
-    
 }
