@@ -48,6 +48,10 @@ public class Player : MonoBehaviour
     public void DecreaseMana(int value)
     {
         Mana -= value;
+        if (Mana <= 0)
+        {
+            Mana = 0;
+        }
     }
 
     // Get player

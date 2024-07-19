@@ -111,6 +111,10 @@ public class WeaponController : MonoBehaviour
         {
             Vector3 firePointPosition1 = FirePoint.position + FirePoint.right * 1 / 2;
             Vector3 firePointPosition2 = FirePoint.position;
+            if (player.Mana < 10)
+            {
+                return;
+            }
             player.DecreaseMana(10);
             GameObject bulletTmp1 = Instantiate(Bullet, firePointPosition1, Quaternion.identity);
             Rigidbody2D rb1 = bulletTmp1.GetComponent<Rigidbody2D>();
@@ -123,7 +127,13 @@ public class WeaponController : MonoBehaviour
         }
         else if (_bulletType == _param.BULLET_TYPE_WEAPON4_SHOTGUN)
         {
+            if (player.Mana < 10)
+            {
+                return;
+            }
+            player.DecreaseMana(10);
             // Tạo viên đạn ở giữa
+
             GameObject bulletCenter = Instantiate(Bullet, FirePoint.position, FirePoint.rotation);
             Rigidbody2D rbCenter = bulletCenter.GetComponent<Rigidbody2D>();
             rbCenter.velocity = FirePoint.right * BulletForce;
@@ -140,6 +150,11 @@ public class WeaponController : MonoBehaviour
         }
         else
         {
+            if (player.Mana < 10)
+            {
+                return;
+            }
+            player.DecreaseMana(10);
             GameObject bulletCenter = Instantiate(Bullet, FirePoint.position, FirePoint.rotation);
             Rigidbody2D rbCenter = bulletCenter.GetComponent<Rigidbody2D>();
             rbCenter.velocity = FirePoint.right * BulletForce;

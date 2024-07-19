@@ -17,8 +17,21 @@ namespace Pathfinding {
 		/// <summary>The object that the AI should move to</summary>
 		public Transform target;
 		IAstarAI ai;
+        private Rigidbody2D _rb;
+        private Animator _anim;
+        void Start()
+        {
+            _rb = GetComponent<Rigidbody2D>();
+            _anim = GetComponent<Animator>();
+        }
+        void OnEnable () {
 
-		void OnEnable () {
+			GameObject player = GameObject.FindGameObjectWithTag("Player");
+			if(player != null)
+			{
+				target = player.transform;
+                _anim.SetBool("isMoving", true);
+            }
 			ai = GetComponent<IAstarAI>();
 			// Update the destination right before searching for a path as well.
 			// This is enough in theory, but this script will also update the destination every
@@ -35,5 +48,6 @@ namespace Pathfinding {
 		void Update () {
 			if (target != null && ai != null) ai.destination = target.position;
 		}
+
 	}
 }

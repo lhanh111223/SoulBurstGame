@@ -6,14 +6,13 @@ public class StoreController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI txtCoinbuy;
     [SerializeField] private Transform displayPosition;
     [SerializeField] private GameObject itemPrefab;
-    [SerializeField] private int itemCost;
-    [SerializeField] private PlayerCoinBar playerCoinBar;
+    [SerializeField] private int itemCost; 
 
+    [SerializeField] private PlayerCoinBar playerCoinBar;
     [SerializeField] private float interactionRange = 2f;
 
     private bool isPlayerNearby = false;
-    private Transform playerTransform;
-
+    private bool canPurchase = false;
     void Start()
     {
         txtCoinbuy.text = itemCost.ToString();
@@ -22,7 +21,10 @@ public class StoreController : MonoBehaviour
 
     void Update()
     {
-        // Update logic here if needed
+        if (isPlayerNearby && canPurchase && Input.GetKeyDown(KeyCode.Q))
+        {
+            TryPurchase();
+        }
     }
 
     private void DisplayItem()
@@ -30,17 +32,18 @@ public class StoreController : MonoBehaviour
         Instantiate(itemPrefab, displayPosition.position, Quaternion.identity, displayPosition);
     }
 
-    public void TryPurchaseItem() // Changed to public
+    private void TryPurchase()
     {
         if (playerCoinBar.GetCurrentCoins() >= itemCost)
         {
             playerCoinBar.DecreaseCoin(itemCost);
-            // Instantiate the item in the player's inventory or handle it as needed
-            Debug.Log("Item purchased!");
+            txtCoinbuy.text = "0";
+            canPurchase = false;
+            this.itemCost = 0;
         }
         else
         {
-            Debug.Log("Not enough coins!");
+            Debug.Log("Không đủ tiền để mua món hàng này.");
         }
     }
 
@@ -49,7 +52,7 @@ public class StoreController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerNearby = true;
-            playerTransform = other.transform;
+            canPurchase = playerCoinBar.GetCurrentCoins() >= itemCost;
         }
     }
 
@@ -58,7 +61,11 @@ public class StoreController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerNearby = false;
-            playerTransform = null;
+            canPurchase = false;
         }
+    }
+    public void setPriceWP(int value)
+    {
+       
     }
 }

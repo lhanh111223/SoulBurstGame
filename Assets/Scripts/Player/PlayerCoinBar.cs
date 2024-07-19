@@ -8,7 +8,7 @@ public class PlayerCoinBar : MonoBehaviour
 
     void Start()
     {
-        currentCoins = 0;
+        currentCoins = 100;
         UpdateCoinText();
     }
 

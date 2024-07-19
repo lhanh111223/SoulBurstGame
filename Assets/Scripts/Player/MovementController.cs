@@ -42,9 +42,6 @@ public class MovementController : MonoBehaviour
 
     // Normal Attack
 
-    // Store interaction
-    private StoreController currentStore;
-
     private void Start()
     {
         this._isInvincible = false;

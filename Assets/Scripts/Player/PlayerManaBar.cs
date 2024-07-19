@@ -24,19 +24,6 @@ public class PlayerManaBar : MonoBehaviour
     void Update()
     {
         SetMana(player.Mana, maxMana);
-        
-        //if (Input.GetKeyDown(KeyCode.Space) && canClick)
-        //{
-        //    if (player.Mana > 0)
-        //    {
-        //        player.DecreaseMana(50);
-        //        SetMana(player.Mana, maxMana);
-        //    }
-        //    else
-        //    {
-        //        canClick = false;
-        //    }
-        //} 
     }
     public void SetMana(int currentMana, int maxMana)
     {
