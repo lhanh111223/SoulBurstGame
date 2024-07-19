@@ -2,7 +2,7 @@ using Assets.Scripts.Boss;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public enum BossAnimation
 {
@@ -16,23 +16,34 @@ public enum BossAnimation
 }
 public class BossStateManager : MonoBehaviour
 {
+    [Header("State")]
+
     public BossBaseState currentState;
     public BossIdleState IdleState = new BossIdleState();
     public BossAttackState AttackState = new BossAttackState();
     public BossImmuneState ImmuneState = new BossImmuneState();
     public BossDeadState DeadState = new BossDeadState();
-
-     
+    [Header("HealthBoss")]
     public HealthBossController HealthBossController;
+    public GameObject HealthBarBoss;
     private string currentAnimationState = "BossIdle";
+    [Header("Animation")]
     public Animator bossAnim;
 
+    [Header("Spawner")]
+    public Transform startPosition;
+    public List<Transform> spawnPosition;
+    public GameObject[] enemyInstances;
+    public GameObject meleeEnemy;
+    public GameObject rangeEnemy;
+    public bool isImmune;
     // Start is called before the first frame update
     void Start()
     {
         currentState = IdleState;
         currentState.EnterState(this);
         bossAnim = GetComponent<Animator>();
+        
     }
 
     // Update is called once per frame
@@ -136,11 +147,25 @@ public class BossStateManager : MonoBehaviour
 
         currentAnimationState = BossAnimation.BossDead.ToString();
     }
+    public void loadSceneWinGame()
+    {
+        Debug.Log("Victory");
+        SceneManager.LoadScene("WinGameScene");
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (currentState != null)
         {
             currentState.OnCollisionEnter(this, collision);
         }
+        if (collision.gameObject.CompareTag("Bullet1") && currentState.GetType() != typeof(BossImmuneState))
+        {
+            HealthBossController.takeDamage(10);
+            collision.gameObject.SetActive(false);
+        }
+    }
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerHealthBar : MonoBehaviour
 {
     public Image fillBar;
-    public TextMeshProUGUI txtHealth;
+    public TextMeshProUGUI txtHp;
     public int maxHealth = 100;
     public int currentHealth;
     // Start is called before the first frame update
@@ -16,17 +16,25 @@ public class PlayerHealthBar : MonoBehaviour
         setHealth(currentHealth, maxHealth);
     }
 
-
+    
     public void setHealth(int currentHealth, int maxHealth)
     {
         fillBar.fillAmount = (float)currentHealth / (float)maxHealth;
-        txtHealth.text = currentHealth.ToString() + " / " + maxHealth.ToString();
+        txtHp.text = currentHealth.ToString() + " / " + maxHealth.ToString();
     }
 
+
     public void takeDamage(int damage)
-    {
+    {  
         currentHealth -= damage;
         fillBar.fillAmount = (float)currentHealth / (float)maxHealth;
-        txtHealth.text = currentHealth.ToString() + " / " + maxHealth.ToString();
+        txtHp.text = currentHealth.ToString() + " / " + maxHealth.ToString();
     }
+    //void Death()
+    //{
+    //    if(currentHealth<0)
+    //    {
+            
+    //    }
+    //}
 }

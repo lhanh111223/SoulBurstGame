@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 2335811224744752523}
   - component: {fileID: 8312289674149212069}
   - component: {fileID: 8610849243369641522}
+  - component: {fileID: 8039983676365723562}
   m_Layer: 0
   m_Name: PlayerNinja
   m_TagString: Player
@@ -268,3 +269,16 @@ MonoBehaviour:
   Target: {fileID: 0}
   inputSkill: 304
   SkillDuration: 5
+--- !u!114 &8039983676365723562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2958298982892160405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 930cf218590e251438c4972517d44e2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  breakUnknownPrefabs: {fileID: 3246659033887597132, guid: 5efcd1f4764c58b40a9bb664d329ea09, type: 3}

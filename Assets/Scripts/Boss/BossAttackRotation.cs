@@ -38,9 +38,8 @@ public class BossAttackRotation : MonoBehaviour
 
     public void LaserAttack()
     {
-        Vector3 direction = Player.position - laserTransform.position;
+        Vector3 direction = Player.position - laserTransform.position + (Vector3.one*1.5f);
         float distance = direction.magnitude;
-        direction.Normalize(); // Chuẩn hóa hướng
 
         // Tạo laser tại vị trí của laserTransform
         var laser = Instantiate(laserBeam, laserTransform.position, Quaternion.identity);
@@ -52,14 +51,8 @@ public class BossAttackRotation : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         laser.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
-        // Tạo và điều chỉnh collider cho laser
-        BoxCollider2D laserCollider = laser.GetComponent<BoxCollider2D>();
-        if (laserCollider != null)
-        {
-            // Điều chỉnh kích thước và vị trí của collider
-            laserCollider.size = new Vector2(distance, laserCollider.size.y);
-            laserCollider.offset = new Vector2(distance / 2, 0); // Đặt collider ở giữa
-        }
+
+        
 
         // Hủy laser sau một khoảng thời gian (ví dụ: 2 giây)
         Destroy(laser, 2f);
@@ -83,7 +76,7 @@ public class BossAttackRotation : MonoBehaviour
     public void RangeAttack()
     {
         var bullet = Instantiate(rangeBullet, rangeTransform.position, Quaternion.identity);
-        Rigidbody2D rbBullet = bullet.GetComponent<Rigidbody2D>();
+        BossBulletController rbBullet = bullet.GetComponent<BossBulletController>();
 
         Vector3 direction = Player.position - rangeTransform.position;
         direction.z = 0; // Đảm bảo hướng di chuyển chỉ trên mặt phẳng 2D
@@ -92,7 +85,8 @@ public class BossAttackRotation : MonoBehaviour
         float angle = Mathf.Atan2(-direction.y, -direction.x) * Mathf.Rad2Deg;
         bullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
-        rbBullet.velocity = direction * bulletSpeed; // Thay đổi vận tốc của Rigidbody2D
+        rbBullet.SetDirection(direction);
+        rbBullet.speed = bulletSpeed;
         StartCoroutine(InvokeDestroyGameObject(bullet, 2f));
     }
 

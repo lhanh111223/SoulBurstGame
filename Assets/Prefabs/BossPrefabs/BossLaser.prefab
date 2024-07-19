@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6383443488098879124}
   - component: {fileID: 4173148615934394295}
   - component: {fileID: 8677932110527706071}
+  - component: {fileID: -5883720541869580381}
   m_Layer: 0
   m_Name: BossLaser
   m_TagString: Untagged
@@ -136,7 +137,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -184,3 +185,21 @@ PolygonCollider2D:
       - {x: -1.421875, y: 0.03125}
       - {x: -1.609375, y: 0.03125}
   m_UseDelaunayMesh: 0
+--- !u!114 &-5883720541869580381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3688834699913497124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbcafaf8b65b5594aa9833cc05617e5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boss: {fileID: 0}
+  player: {fileID: 0}
+  laserRenderer: {fileID: 0}
+  laserWidth: 0.1
+  laserDamage: 5
+  PlayerHealthBar: {fileID: 0}

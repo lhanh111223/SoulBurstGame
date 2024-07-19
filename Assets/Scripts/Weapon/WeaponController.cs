@@ -74,9 +74,12 @@ public class WeaponController : MonoBehaviour
                     lazer.SetActive(false);
                 }
             }
-            else
+            else 
             {
-                FireBullet();
+                if (player.Mana > 0)
+                {
+                    FireBullet();
+                }
             }
 
         }
@@ -117,6 +120,8 @@ public class WeaponController : MonoBehaviour
         rb.AddForce(transform.right * BulletForce, ForceMode2D.Impulse);
 
     }
+
+
 
     //Lazer
     void FireWithLazerLength()
