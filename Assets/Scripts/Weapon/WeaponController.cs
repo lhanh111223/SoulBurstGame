@@ -75,7 +75,7 @@ public class WeaponController : MonoBehaviour
                 else
                     lazer.SetActive(false);
             }
-            else
+            else 
             {
                 if (player.Mana > 0)
                     FireBullet();

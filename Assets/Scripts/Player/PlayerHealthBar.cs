@@ -24,12 +24,14 @@ public class PlayerHealthBar : MonoBehaviour
         setHealth(currentHealth, maxHealth);
     }
 
-
+    
     public void setHealth(int currentHealth, int maxHealth)
     {
         fillBar.fillAmount = (float)currentHealth / (float)maxHealth;
         txtHp.text = currentHealth.ToString() + " / " + maxHealth.ToString();
+        txtHp.text = currentHealth.ToString() + " / " + maxHealth.ToString();
     }
+
 
 
     public void takeDamage(int damage)
@@ -43,6 +45,7 @@ public class PlayerHealthBar : MonoBehaviour
             player.PlayerDie();
         }
         fillBar.fillAmount = (float)currentHealth / (float)maxHealth;
+        txtHp.text = currentHealth.ToString() + " / " + maxHealth.ToString();
         txtHp.text = currentHealth.ToString() + " / " + maxHealth.ToString();
     }
     public void IncreaseHealth(int amount)

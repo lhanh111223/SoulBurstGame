@@ -6,6 +6,8 @@ public class BossBulletController : MonoBehaviour
 {
     public PlayerHealthBar PlayerHealthBar;
     public int bulletDamage = 5;
+    public float speed = 100f;
+    private Vector3 direction;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,9 +21,12 @@ public class BossBulletController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position += direction * speed * Time.fixedDeltaTime;
     }
-
+    public void SetDirection(Vector3 dir)
+    {
+        direction = dir.normalized;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))

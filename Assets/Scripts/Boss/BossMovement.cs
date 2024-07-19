@@ -1,4 +1,4 @@
-using Pathfinding;
+﻿using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -88,5 +88,14 @@ public class BossMovement : MonoBehaviour
             }
             yield return null;
         }
+    }
+    
+    public void MoveToTarget(Vector3 position)
+    {
+        
+            Vector2 direction = ((Vector2)position - (Vector2)transform.position).normalized;
+            Vector3 force = direction * moveSpeed * Time.deltaTime;
+            transform.position += force;
+        
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameLogic : MonoBehaviour
 {
@@ -21,6 +22,10 @@ public class GameLogic : MonoBehaviour
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         crosshair.transform.position = new Vector3(mousePos.x, mousePos.y, 0);
     }
-
+    public void loadSceneWinGame()
+    {
+        Debug.Log("Victory");
+        SceneManager.LoadScene("WinGameScene");
+    }
 
 }
